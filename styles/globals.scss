@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		font-family: 'Barlow', sans-serif;
+	}
+
+	a {
+		&:not(.card):not(.btn) {
+			@apply transition duration-200;
+
+			&:hover, &:active, &:focus {
+				@apply text-primary;
+			}
+		}
+	}
+}
+
+@layer components {
+	.scrollbar-container.ps {
+		$scrollbar-width: 7px;
+
+		.ps__rail-y {
+			//@apply transition-all duration-200;
+			//transition-property: top, height;
+
+			width: $scrollbar-width+2px;
+
+			> .ps__thumb-y {
+				left: 0;
+				right: 0;
+				width: $scrollbar-width;
+				background-color: theme('colors.base-content');
+				@apply rounded-full
+			}
+		}
+
+		.ps__rail-x, .ps__rail-y {
+			&:hover, &:focus, &.ps--clicking {
+				background-color: transparent;
+
+				> .ps__thumb-x, > .ps__thumb-y {
+					//background-color: theme('colors.base-content');
+				}
+			}
+		}
+	}
+
+	.tooltip {
+		&:before {
+			@apply whitespace-pre-line;
+		}
+	}
+}
