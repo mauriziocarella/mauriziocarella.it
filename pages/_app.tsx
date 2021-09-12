@@ -7,7 +7,7 @@ import Background from "../components/Background";
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<div className="bg-base-300 ">
+		<div className="bg-base-300">
 			<Background/>
 
 			<Component {...pageProps} />
