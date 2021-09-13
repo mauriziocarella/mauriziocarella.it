@@ -1,8 +1,8 @@
 import React from "react"
-import PerfectScrollbar from "react-perfect-scrollbar"
+import PerfectScrollbar, { ScrollBarProps } from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
 
-const Scrollbar: React.VFC = ({ ...props }) => {
+const Scrollbar: React.FC<ScrollBarProps> = ({ ...props }) => {
     return <PerfectScrollbar {...props} />
 }
 
