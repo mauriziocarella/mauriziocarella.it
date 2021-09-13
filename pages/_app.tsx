@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react';
-import {AppProps} from 'next/app';
+import React, { useEffect } from "react"
+import { AppProps } from "next/app"
 
-import '../styles/globals.scss';
+import "../styles/globals.scss"
 
-import Background from "../components/Background";
+import Background from "../components/Background"
 
-const App = function({ Component, pageProps }: AppProps) {
-	useEffect(() => {
-		document.documentElement.classList.add('bg-base-300')
-	}, []);
+const App = function ({ Component, pageProps }: AppProps): JSX.Element {
+    useEffect(() => {
+        document.documentElement.classList.add("bg-base-300")
+    }, [])
 
-	return (
-		<div className="bg-base-300">
-			<Background/>
+    return (
+        <div>
+            <Background />
 
-			<Component {...pageProps} />
-		</div>
-	);
+            <Component {...pageProps} />
+        </div>
+    )
 }
 
-export default App;
+export default App
