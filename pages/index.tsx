@@ -89,7 +89,7 @@ const Social: React.VFC<{social: typeof socials[number]}> = ({social, ...props})
 
 const Profile: React.VFC<React.HTMLProps<HTMLDivElement>> = ({className, ...props}) => {
 	return (
-		<div className={classNames("text-center px-4", className)} {...props}>
+		<div className={classNames("text-center px-2", className)} {...props}>
 			<div className="text-4xl my-3">About me</div>
 			<div className="mx-auto rounded-full overflow-hidden shadow-xl" style={{maxWidth: 200}}>
 				<Image
