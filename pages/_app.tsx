@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {AppProps} from 'next/app';
 
 import '../styles/globals.scss';
 
 import Background from "../components/Background";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = function({ Component, pageProps }: AppProps) {
+	useEffect(() => {
+		document.documentElement.classList.add('bg-base-300')
+	}, []);
+
 	return (
 		<div className="bg-base-300">
 			<Background/>
@@ -14,3 +18,5 @@ export default function App({ Component, pageProps }: AppProps) {
 		</div>
 	);
 }
+
+export default App;

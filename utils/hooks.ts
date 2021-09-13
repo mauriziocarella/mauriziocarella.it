@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 
-export const useDarkMode = (): [string, () => void] => {
-	const [theme, setTheme] = useState('light');
+export const useDarkMode = (): [boolean, () => void] => {
+	const [darkMode, setDarkMode] = useState(false);
 
 	useEffect(() => {
-		setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+		setDarkMode(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
 
-		window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', (e) => setTheme(e.matches ? 'dark' : 'light'));
+		window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', (e) => setDarkMode(e.matches));
 	}, [])
 
 	const toggleTheme = () => {
-		setTheme(theme === 'light' ? 'dark' : 'light')
+		setDarkMode(!darkMode)
 	};
 
 	useEffect(() => {
-		document.documentElement.setAttribute('data-theme', theme);
-	}, [theme]);
+		document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+	}, [darkMode]);
 
-	return [theme, toggleTheme]
+	return [darkMode, toggleTheme]
 };

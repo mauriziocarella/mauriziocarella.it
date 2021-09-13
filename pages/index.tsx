@@ -89,13 +89,14 @@ const Social: React.VFC<{social: typeof socials[number]}> = ({social, ...props})
 
 const Profile: React.VFC<React.HTMLProps<HTMLDivElement>> = ({className, ...props}) => {
 	return (
-		<div className={classNames("text-center", className)} {...props}>
+		<div className={classNames("text-center px-4", className)} {...props}>
 			<div className="text-4xl my-3">About me</div>
-			<div className="mx-auto rounded-full shadow-xl overflow-hidden" style={{maxWidth: 200}}>
+			<div className="mx-auto rounded-full overflow-hidden shadow-xl" style={{maxWidth: 200}}>
 				<Image
 					src={imgProfile}
 					alt="Profile picture"
 					layout="responsive"
+					className="rounded-full overflow-hidden"
 				/>
 			</div>
 
@@ -104,7 +105,7 @@ const Profile: React.VFC<React.HTMLProps<HTMLDivElement>> = ({className, ...prop
 				<div className="text-lg">Hi, I am a 5 years experienced full stack developer skilled in React, NodeJS, Laravel, PHP, MySQL, MongoDB. I am actually full-time employed as project manager/web developer at <a target="_blank" rel="noopener noreferrer" href="https://meway.it">@Meway SRL</a></div>
 			</div>
 
-			<div className="text-center flex justify-center items-center text-2xl">
+			<div className="text-center flex flex-wrap justify-center items-center text-2xl">
 				{socials.map((social, index) => (
 					<Social key={`social-${index}`} social={social}/>
 				))}
@@ -119,7 +120,7 @@ const Repository: React.VFC<{repository: RepositoryType} & React.HTMLProps<HTMLD
 			<a rel="noopener noreferrer" href={repository.url} target="_blank" className="card bg-base-200 hover:bg-base-100 rounded shadow hover:shadow-xl transition-all duration-200 h-full">
 				<div className="card-body flex flex-col">
 					<div className="text-2xl font-semibold mb-2">{repository.name}</div>
-					<div className="flex-grow font-light mb-2">{repository.description}</div>
+					<div className="flex-grow font-light mb-2 break-words">{repository.description}</div>
 					<div className="flex flex-wrap items-center py-2">
 						<div className="flex items-center mr-3 tooltip" data-tip={`Last update:\n${new Date(repository.updated_at).toLocaleDateString()} ${new Date(repository.updated_at).toLocaleTimeString()}`}>
 							<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -161,7 +162,7 @@ const Repository: React.VFC<{repository: RepositoryType} & React.HTMLProps<HTMLD
 const Home: React.FC<{works: RepositoryType[], forks: RepositoryType[]}> = ({...props}) => {
 	const [works, setWorks] = useState(props.works);
 	const [forks, setForks] = useState(props.forks);
-	const [,toggleTheme] = useDarkMode();
+	const [, setDarkMode] = useDarkMode();
 
 	useEffect(() => {
 		fetchRepositories()
@@ -182,7 +183,7 @@ const Home: React.FC<{works: RepositoryType[], forks: RepositoryType[]}> = ({...
 					<div className="p-2 flex items-center absolute top-0 w-full md:static">
 						<div className="flex-grow"/>
 						<div className="tooltip tooltip-bottom tooltip-left" data-tip="Click to toggle theme">
-							<button type="button" className="btn btn-ghost" onClick={() => toggleTheme()} aria-label="Toggle theme">
+							<button type="button" className="btn btn-ghost" onClick={() => setDarkMode()} aria-label="Toggle theme">
 								<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
 								</svg>
@@ -191,8 +192,8 @@ const Home: React.FC<{works: RepositoryType[], forks: RepositoryType[]}> = ({...
 					</div>
 					<Scrollbar className="flex-grow md:overflow-y-auto p-4">
 						<section className="mb-4">
-							<div className="text-3xl mb-4">Repositories</div>
-							<div className="grid gap-4 md:grid-cols-2 3xl:grid-cols-3 4xl:grid-cols-4">
+							<div className="text-3xl mb-4 text-center md:text-left">Repositories</div>
+							<div className="grid gap-4 grid-cols-1 md:grid-cols-2 3xl:grid-cols-3 4xl:grid-cols-4">
 								{works.map((repo) => (
 									<Repository
 										key={repo.id}
@@ -203,8 +204,8 @@ const Home: React.FC<{works: RepositoryType[], forks: RepositoryType[]}> = ({...
 							</div>
 						</section>
 						<section className="mb-4">
-							<div className="text-3xl mb-4">Forks</div>
-							<div className="grid gap-4 md:grid-cols-2 3xl:grid-cols-3 4xl:grid-cols-4">
+							<div className="text-3xl mb-4 text-center md:text-left">Forks</div>
+							<div className="grid gap-4 grid-cols-1 md:grid-cols-2 3xl:grid-cols-3 4xl:grid-cols-4">
 								{forks.map((repo) => (
 									<Repository
 										key={repo.id}
