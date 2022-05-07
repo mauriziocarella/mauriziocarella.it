@@ -4,8 +4,9 @@ import { AppProps } from "next/app"
 import "../styles/globals.scss"
 
 import Background from "../components/Background"
+import {Cookie} from "../components/Cookie";
 
-const App = function ({ Component, pageProps }: AppProps): JSX.Element {
+const App = ({ Component, pageProps }: AppProps) => {
     useEffect(() => {
         document.documentElement.classList.add("bg-base-300")
     }, [])
@@ -15,6 +16,8 @@ const App = function ({ Component, pageProps }: AppProps): JSX.Element {
             <Background />
 
             <Component {...pageProps} />
+
+            <Cookie />
         </div>
     )
 }

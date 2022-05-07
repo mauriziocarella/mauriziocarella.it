@@ -1,7 +1,10 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
-    mode: "jit",
-    purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
-    darkMode: false, // or 'media' or 'class'
+    content: [
+        "./pages/**/*.{js,ts,jsx,tsx}",
+        "./components/**/*.{js,ts,jsx,tsx}"
+    ],
     theme: {
         extend: {
             screens: {
@@ -17,11 +20,14 @@ module.exports = {
                 "3/4": "75%",
                 full: "100%",
             },
-        },
-    },
-    variants: {
-        extend: {
-            scrollbar: ["rounded"],
+            colors: {
+                "success": colors.green[500],
+                "success-content": "#ffffff",
+                "success-focus": colors.green[600],
+                "error": colors.red[500],
+                "error-content": "#ffffff",
+                "error-focus": colors.red[600],
+            }
         },
     },
     plugins: [
@@ -29,4 +35,16 @@ module.exports = {
         require("daisyui"),
         require("tailwind-scrollbar"),
     ],
+    daisyui: {
+        themes: [
+            {
+                light: {
+                    ...require("daisyui/src/colors/themes")["[data-theme=light]"],
+                },
+                dark: {
+                    ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
+                },
+            }
+        ]
+    }
 }

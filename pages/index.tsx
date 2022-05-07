@@ -150,7 +150,7 @@ const Repository: React.VFC<
                 rel="noopener noreferrer"
                 href={repository.url}
                 target="_blank"
-                className="card bg-base-200 hover:bg-base-100 rounded shadow hover:shadow-xl transition-all duration-200 h-full"
+                className="card bg-base-200 hover:bg-base-100 rounded-lg shadow hover:shadow-xl transition-all duration-200 h-full"
             >
                 <div className="card-body flex flex-col">
                     <div className="text-2xl font-semibold mb-2">
@@ -348,13 +348,14 @@ const Home: React.FC<{ works: RepositoryType[]; forks: RepositoryType[] }> = ({
                             </div>
                         </section>
 
-                        <div className="text-center my-6 italic text-sm">
-                            <a
+                        <div className="text-center text-gray-500 text-sm tracking-wide my-6">
+                            Made with ❤️ by <a
                                 rel="noopener noreferrer"
                                 href="https://github.com/mauriziocarella"
                                 target="_blank"
+                                className="transition-colors"
                             >
-                                Made with ♥ by Maurizio Carella
+                                Maurizio Carella
                             </a>
                         </div>
                     </Scrollbar>
