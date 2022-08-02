@@ -16,8 +16,6 @@ const App = ({ Component, pageProps }: AppProps) => {
             <Background />
 
             <Component {...pageProps} />
-
-            <Cookie />
         </div>
     )
 }
