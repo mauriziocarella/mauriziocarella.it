@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @layer base {
-    body {
-        font-family: "Barlow", sans-serif;
+    html {
+        font-family: 'Inter', sans-serif;
     }
 
     a {
@@ -18,43 +20,47 @@
     }
 }
 
-@layer components {
-    .scrollbar-container.ps {
-        $scrollbar-width: 7px;
+.scrollbar-container {
+    $scrollbar-width: 7px;
 
+    &.scrollbar-navbar {
         .ps__rail-y {
-            //@apply transition-all duration-200;
-            //transition-property: top, height;
-
-            width: $scrollbar-width + 2px;
-
-            > .ps__thumb-y {
-                left: 0;
-                right: 0;
-                width: $scrollbar-width;
-                background-color: theme("colors.base-content");
-                @apply rounded-full;
-            }
-        }
-
-        .ps__rail-x,
-        .ps__rail-y {
-            &:hover,
-            &:focus,
-            &.ps--clicking {
-                background-color: transparent;
-
-                > .ps__thumb-x,
-                > .ps__thumb-y {
-                    //background-color: theme('colors.base-content');
-                }
-            }
+            @apply mt-16;
         }
     }
 
-    .tooltip {
-        &:before {
-            @apply whitespace-pre-line;
+    .ps__rail-y {
+        //@apply transition-all duration-200;
+        //transition-property: top, height;
+
+        width: $scrollbar-width + 2px;
+
+        > .ps__thumb-y {
+            left: 0;
+            right: 0;
+            width: $scrollbar-width;
+            background-color: theme("colors.base-content");
+            @apply rounded-full;
         }
+    }
+
+    .ps__rail-x,
+    .ps__rail-y {
+        &:hover,
+        &:focus,
+        &.ps--clicking {
+            background-color: transparent;
+
+            > .ps__thumb-x,
+            > .ps__thumb-y {
+                //background-color: theme('colors.base-content');
+            }
+        }
+    }
+}
+
+.tooltip {
+    &:before {
+        @apply whitespace-pre-line;
     }
 }

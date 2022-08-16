@@ -1,23 +1,28 @@
-import React, { useEffect } from "react"
-import { AppProps } from "next/app"
+import React, {useEffect} from 'react';
+import type {AppProps} from 'next/app';
 
-import "../styles/globals.scss"
+import '../styles/globals.scss';
 
-import Background from "../components/Background"
-import {Cookie} from "../components/Cookie";
+import Background from '../components/Background';
+import Meta from '../components/Meta';
+import {PrivacyPolicy} from '../components/PrivacyPolicy';
 
-const App = ({ Component, pageProps }: AppProps) => {
-    useEffect(() => {
-        document.documentElement.classList.add("bg-base-300")
-    }, [])
+const App = ({Component, pageProps}: AppProps) => {
+	useEffect(() => {
+		document.documentElement.classList.add('bg-base-300');
+	}, []);
 
-    return (
-        <div>
-            <Background />
+	return (
+		<>
+			<Meta />
 
-            <Component {...pageProps} />
-        </div>
-    )
-}
+			<Background />
 
-export default App
+			<Component {...pageProps} />
+
+			<PrivacyPolicy />
+		</>
+	);
+};
+
+export default App;
