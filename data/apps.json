@@ -11,7 +11,7 @@
 	},
 	{
 		"name": "Spotify Widget",
-		"description": "Embed your Now Playing information from Spotify into your OBS setup",
+		"description": "Pretty old (but still working) application to embed your Now Playing information from Spotify into your OBS setup",
 		"url": "https://apps.mauriziocarella.it/spotify"
 	}
 ]

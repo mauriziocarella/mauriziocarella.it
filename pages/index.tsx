@@ -65,25 +65,6 @@ const socials = [
 	},
 ];
 
-const fetchRepositories = async () => {
-	const repos = await axios
-		.get(`https://api.github.com/users/mauriziocarella/repos`)
-		.then((res) => res.data)
-		.then((repos): RepositoryType[] =>
-			repos.map((repo: any) => ({
-				...repo,
-				url: repo.html_url,
-				stars: repo.stargazers_count,
-				forks: repo.forks_count,
-			})),
-		);
-
-	const works = repos.filter((repo) => !repo.fork);
-	const forks = repos.filter((repo) => repo.fork);
-
-	return {works, forks};
-};
-
 type SocialProps = {social: typeof socials[number]};
 const Social = ({social}: SocialProps) => (
 	<a
@@ -253,18 +234,8 @@ type HomeProps = {
 	forks: RepositoryType[];
 	apps: AppType[];
 };
-const Home: NextPage<HomeProps> = ({...props}) => {
-	const [works, setWorks] = useState(props.works);
-	const [forks, setForks] = useState(props.forks);
-	const [apps] = useState(props.apps);
+const Home: NextPage<HomeProps> = ({works, forks, apps}) => {
 	const [, setDarkMode] = useDarkMode();
-
-	useEffect(() => {
-		fetchRepositories().then(({works, forks}) => {
-			setWorks(works);
-			setForks(forks);
-		});
-	}, []);
 
 	return (
 		<>
@@ -325,9 +296,22 @@ const Home: NextPage<HomeProps> = ({...props}) => {
 	);
 };
 
-export const getStaticProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	// Fetch data from external API
-	const {works, forks} = await fetchRepositories();
+	const repos = await axios
+		.get(`https://api.github.com/users/mauriziocarella/repos`)
+		.then((res) => res.data)
+		.then((repos): RepositoryType[] =>
+			repos.map((repo: any) => ({
+				...repo,
+				url: repo.html_url,
+				stars: repo.stargazers_count,
+				forks: repo.forks_count,
+			})),
+		);
+
+	const works = repos.filter((repo) => !repo.fork);
+	const forks = repos.filter((repo) => repo.fork);
 
 	const apps = require('../data/apps');
 
