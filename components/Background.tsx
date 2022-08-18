@@ -10,7 +10,7 @@ const Background = () => {
 
 	return (
 		<>
-			<div className="fixed w-screen h-screen opacity-5">
+			<div className="fixed w-screen h-screen opacity-5" style={{zIndex: -1}}>
 				<Particles
 					init={particlesInit}
 					options={{

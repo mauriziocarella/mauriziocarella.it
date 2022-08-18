@@ -82,7 +82,7 @@ type ProfileProps = React.ComponentProps<'div'>;
 const Profile = ({className, ...props}: ProfileProps) => {
 	return (
 		<div className={classNames('text-center px-2', className)} {...props}>
-			<div className="text-4xl my-3">About me</div>
+			<div className="text-4xl my-3 font-medium">About me</div>
 			<div className="mx-auto rounded-full overflow-hidden shadow-xl" style={{maxWidth: 200}}>
 				<Image src={imgProfile} alt="Profile picture" layout="responsive" className="rounded-full overflow-hidden" />
 			</div>
@@ -91,7 +91,7 @@ const Profile = ({className, ...props}: ProfileProps) => {
 				<div className="text-2xl mb-4 font-medium">Maurizio Carella</div>
 				<div className="text-lg">
 					Ciao! I am a 5 years experienced full stack developer skilled in React, NodeJS, Laravel, PHP, MySQL, MongoDB.
-					I am actually full-time employed as project manager/web developer at
+					I am actually full-time employed as project manager/web developer at{' '}
 					<a target="_blank" rel="noopener noreferrer" href="https://meway.it">
 						@Meway SRL
 					</a>
