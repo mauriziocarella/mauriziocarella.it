@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
 import {GetServerSideProps, NextPage} from 'next';
+import fs from 'fs/promises';
 import axios from 'axios';
 import {
 	FaDiscord,
@@ -21,6 +22,7 @@ import imgProfile from '../public/images/profile.png';
 import {useDarkMode} from '../utils/hooks';
 import Scrollbar from '../components/Scrollbar';
 import {ExternalLinkIcon, LightBulbIcon} from '@heroicons/react/outline';
+import path from 'path';
 
 const socials = [
 	{
@@ -313,7 +315,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	const works = repos.filter((repo) => !repo.fork);
 	const forks = repos.filter((repo) => repo.fork);
 
-	const apps = require('../data/apps');
+	const apps = await fs.readFile(path.join(process.cwd(), 'data/apps.json'), 'utf-8').then((json) => JSON.parse(json));
 
 	// Pass data to the page via props
 	return {

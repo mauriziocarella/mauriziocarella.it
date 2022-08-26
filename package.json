@@ -6,7 +6,6 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "production": "npm run build && npm run start",
         "lint": "next lint",
         "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md|vue)\""
     },
