@@ -101,13 +101,13 @@ export const Tooltip = ({
 	const popupColor = useMemo(() => {
 		switch (color) {
 			default:
-				return 'bg-neutral-900 text-neutral-content-dark border-neutral-200 dark:border-neutral-800';
+				return 'bg-neutral-900 text-neutral-content-dark';
 		}
 	}, [color]);
 	const arrowColor = useMemo(() => {
 		switch (color) {
 			default:
-				return 'border-neutral-200 dark:border-neutral-800 after:border-neutral-900';
+				return 'border-neutral-900';
 		}
 	}, [color]);
 	const content = useMemo(() => {
@@ -142,7 +142,7 @@ export const Tooltip = ({
 						style={styles.popper}
 						{...attributes.popper}
 						className={classNames(
-							'inline-block border rounded p-2 shadow-sm text-xs text-center max-w-[200px] transition-opacity pointer-events-none z-[99999] select-none font-medium whitespace-pre-line',
+							'inline-block rounded p-2 shadow-sm text-xs text-center max-w-[200px] transition-opacity pointer-events-none z-[99999] select-none font-medium whitespace-pre-line',
 							popupColor,
 						)}>
 						{text}
@@ -151,18 +151,12 @@ export const Tooltip = ({
 								ref={setArrowElement}
 								style={styles.arrow}
 								className={classNames(
-									'absolute mx-auto w-0 h-0 border-solid border-[4px] after:absolute after:content-[""] after:border-[3px]',
+									'absolute mx-auto w-0 h-0 border-solid border-[4px]',
 									arrowColor,
-									{
-										'-bottom-1 border-b-0 border-b-transparent border-x-transparent after:left-[-3px] after:top-[-4px] after:border-b-0 after:border-b-transparent after:border-x-transparent':
-											state?.placement === 'top',
-										'-top-1 border-t-0 border-t-transparent border-x-transparent after:left-[-3px] after:top-[1px] after:border-t-0 after:border-t-transparent after:border-x-transparent':
-											state?.placement === 'bottom',
-										'-left-1 border-l-0 border-l-transparent border-y-transparent after:right-[-4px] after:top-[-3px] after:border-l-0 after:border-l-transparent after:border-y-transparent':
-											state?.placement === 'right',
-										'-right-1 border-r-0 border-r-transparent border-y-transparent after:right-[1px] after:top-[-3px] after:border-r-0 after:border-r-transparent after:border-y-transparent':
-											state?.placement === 'left',
-									},
+									state?.placement === 'top' && '-bottom-1 border-b-0 !border-x-transparent',
+									state?.placement === 'bottom' && '-top-1 border-t-0 !border-x-transparent',
+									state?.placement === 'right' && '-left-1 border-l-0 !border-y-transparent',
+									state?.placement === 'left' && '-right-1 border-r-0 !border-y-transparent',
 								)}
 							/>
 						)}
