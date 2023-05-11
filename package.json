@@ -1,45 +1,45 @@
 {
-    "name": "mauriziocarella.it",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "start": "next start",
-        "lint": "next lint",
-        "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md|vue)\""
-    },
-    "dependencies": {
-        "@heroicons/react": "^2.0.18",
-        "axios": "^0.27.2",
-        "next": "^13.4.1",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-icons": "^4.2.0",
-        "tailwind": "^4.0.0"
-    },
-    "devDependencies": {
-        "@headlessui/react": "^1.7.14",
-        "@popperjs/core": "^2.11.7",
-        "@tailwindcss/typography": "^0.5.2",
-        "@types/node": "^17.0.31",
-        "@types/react": "17.0.20",
-        "@typescript-eslint/eslint-plugin": "^4.31.1",
-        "autoprefixer": "^10.4.7",
-        "classnames": "^2.3.1",
-        "eslint": "^7.32.0",
-        "eslint-config-next": "^13.4.1",
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-react": "^7.25.1",
-        "postcss": "^8.4.13",
-        "postcss-import": "^14.0.2",
-        "prettier": "^2.4.0",
-        "react-popper": "^2.3.0",
-        "sass": "^1.51.0",
-        "tailwind-merge": "^1.12.0",
-        "tailwind-scrollbar": "^3.0.1",
-        "tailwindcss": "^3.0.24",
-        "typescript": "^5.0.4"
-    }
+	"name": "mauriziocarella.it",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md|vue)\""
+	},
+	"dependencies": {
+		"@heroicons/react": "^2.0.18",
+		"axios": "^0.27.2",
+		"next": "^13.4.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-icons": "^4.2.0",
+		"tailwind": "^4.0.0"
+	},
+	"devDependencies": {
+		"@headlessui/react": "^1.7.14",
+		"@popperjs/core": "^2.11.7",
+		"@tailwindcss/typography": "^0.5.2",
+		"@types/node": "^17.0.31",
+		"@types/react": "17.0.20",
+		"@typescript-eslint/eslint-plugin": "^4.31.1",
+		"autoprefixer": "^10.4.7",
+		"classnames": "^2.3.1",
+		"eslint": "^7.32.0",
+		"eslint-config-next": "^13.4.1",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-react": "^7.25.1",
+		"postcss": "^8.4.13",
+		"postcss-import": "^14.0.2",
+		"prettier": "^2.4.0",
+		"react-popper": "^2.3.0",
+		"sass": "^1.51.0",
+		"tailwind-merge": "^1.12.0",
+		"tailwind-scrollbar": "^3.0.1",
+		"tailwindcss": "^3.0.24",
+		"typescript": "^5.0.4"
+	}
 }
