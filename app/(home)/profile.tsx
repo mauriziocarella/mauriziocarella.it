@@ -10,9 +10,11 @@ export const Profile = ({className, ...props}: ProfileProps) => {
 	return (
 		<div className={classNames('text-center px-2', className)} {...props}>
 			<div className="text-4xl my-3 font-medium">About me</div>
-			<div className="mx-auto rounded-full overflow-hidden shadow-xl" style={{maxWidth: 200}}>
-				<Image src={imgProfile} alt="Profile picture" className="rounded-full overflow-hidden" />
-			</div>
+			<Image
+				src={imgProfile}
+				alt="Profile picture"
+				className="mx-auto shadow-xl rounded-full overflow-hidden w-[200px]"
+			/>
 
 			<div className="px-2 my-4">
 				<div className="text-2xl mb-4 font-medium">Maurizio Carella</div>
