@@ -15,6 +15,7 @@ export const Navbar = () => {
 				icon={darkMode ? MoonIcon : SunIcon}
 				onClick={() => toggleDarkMode()}
 				tooltip="Click to toggle dark mode"
+				aria-label="Toggle dark mode"
 			/>
 		</div>
 	);

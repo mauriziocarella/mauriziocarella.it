@@ -58,7 +58,12 @@ const socials = [
 type SocialProps = {social: typeof socials[number]};
 export const Social = ({social}: SocialProps) => (
 	<Tooltip text={social.label}>
-		<Link rel="noopener noreferrer" href={social.link} className="p-2 hover:text-primary" target="_blank">
+		<Link
+			rel="noopener noreferrer"
+			href={social.link}
+			className="p-2 hover:text-primary"
+			target="_blank"
+			aria-label={social.label}>
 			{social.icon}
 		</Link>
 	</Tooltip>

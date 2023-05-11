@@ -159,7 +159,7 @@ const Home = async () => {
 							</div>
 						</section>
 
-						<div className="text-center text-gray-500 text-sm tracking-wide my-6">
+						<div className="text-center text-gray-600 dark:text-gray-200 text-sm tracking-wide my-6">
 							Made with ❤️ by{' '}
 							<Link
 								rel="noopener noreferrer"
