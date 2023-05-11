@@ -16,6 +16,22 @@ export const metadata: Metadata = {
 		url: 'https://mauriziocarella.it',
 		name: 'Maurizio Carella',
 	},
+	openGraph: {
+		type: 'website',
+		url: 'https://mauriziocarella.it',
+		siteName: 'Maurizio Carella',
+		title: 'Maurizio Carella | Web developer',
+		description:
+			'Ciao! I am a 5 years experienced full stack developer with skills with React, NodeJS, Laravel, MySQL, MongoDB. Contact me for further information',
+	},
+	twitter: {
+		card: 'summary',
+		site: '@mauriziocarella',
+		creator: '@mauriziocarella',
+		title: 'Maurizio Carella | Web developer',
+		description:
+			'Ciao! I am a 5 years experienced full stack developer with skills with React, NodeJS, Laravel, MySQL, MongoDB. Contact me for further information',
+	},
 };
 
 const RootLayout = ({children}: {children: React.ReactNode}) => {
