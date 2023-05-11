@@ -38,7 +38,7 @@ const RootLayout = ({children}: {children: React.ReactNode}) => {
 	return (
 		<html lang="en">
 			<body className="bg-neutral-50 dark:bg-neutral-800 dark:text-neutral-50 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-neutral-500 dark:scrollbar-thumb-neutral-300 scrollbar-track-neutral-100 dark:scrollbar-track-neutral-700 overflow-y-auto pr-0.5">
-				<div id="root">{children}</div>
+				{children}
 
 				<PrivacyPolicy />
 			</body>

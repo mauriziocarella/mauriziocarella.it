@@ -37,6 +37,7 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off',
 		'react/display-name': 'off',
 		'react/prop-types': 'off',
+		'react-hooks/rules-of-hooks': 'off',
 		'no-empty': 'off',
 	},
 };

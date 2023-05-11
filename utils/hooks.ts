@@ -13,6 +13,7 @@ export const useDarkMode = (): [boolean, () => void] => {
 
 	useEffect(() => {
 		const listener = (e: MediaQueryListEvent) => setDarkMode(e.matches);
+
 		if (typeof window !== 'undefined') {
 			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', listener);
 		}
@@ -39,4 +40,14 @@ export const useDarkMode = (): [boolean, () => void] => {
 	}, [darkMode]);
 
 	return [darkMode, toggleTheme];
+};
+
+export const useIsServer = () => {
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	return !mounted;
 };
