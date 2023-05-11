@@ -7,7 +7,7 @@ interface MetaProps {
 
 const Meta = (props: MetaProps) => {
 	let title = `Maurizio Carella | Web developer`;
-	const description = `Ciao! I am a 5 years experienced full stack developer with skills with React, NodeJS, Laravel, MySQL, MongoDB. Contact me for further information`;
+	const description = ``;
 
 	if (props.title) {
 		title += ` - ${props.title}`;
@@ -16,13 +16,10 @@ const Meta = (props: MetaProps) => {
 	return (
 		<Head>
 			<meta charSet="UTF-8" />
-			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-			<meta
-				name="keywords"
-				content="maurizio carella, github, projects, developer, mobile, web, website, frontend, backend, fullstack, react, nodejs, laravel, php, javascript, mysql, mongodb"
-			/>
+			<meta name="viewport" content="" />
+			<meta name="keywords" content="" />
 			<meta name="description" content={description} />
-			<meta name="robots" content="index, follow" />
+			<meta name="robots" content="" />
 
 			<meta httpEquiv="X-UA-Compatible" content="ie=edge" />
 			<meta httpEquiv="content-language" content="it" />

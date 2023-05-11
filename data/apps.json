@@ -13,5 +13,10 @@
 		"name": "Spotify Widget",
 		"description": "Pretty old (but still working) application to embed your Now Playing information from Spotify into your OBS setup",
 		"url": "https://apps.mauriziocarella.it/spotify"
+	},
+	{
+		"name": "Multi-Twitch",
+		"description": "Watch all your favorite streamers at the same time and follow the chat",
+		"url": "https://twitch.mauriziocarella.it/multi"
 	}
 ]
