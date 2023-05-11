@@ -4,13 +4,24 @@ import {useCallback, useEffect, useState} from 'react';
 
 export const useDarkMode = (): [boolean, () => void] => {
 	const [darkMode, setDarkMode] = useState(
-		window.sessionStorage.getItem('darkMode')
-			? window.sessionStorage.getItem('darkMode') === '1'
-			: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+		typeof window !== 'undefined'
+			? window.sessionStorage.getItem('darkMode')
+				? window.sessionStorage.getItem('darkMode') === '1'
+				: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+			: false,
 	);
 
 	useEffect(() => {
-		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => setDarkMode(e.matches));
+		const listener = (e: MediaQueryListEvent) => setDarkMode(e.matches);
+		if (typeof window !== 'undefined') {
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', listener);
+		}
+
+		return () => {
+			if (typeof window !== 'undefined') {
+				window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', listener);
+			}
+		};
 	}, []);
 
 	const toggleTheme = useCallback(() => {
@@ -24,7 +35,7 @@ export const useDarkMode = (): [boolean, () => void] => {
 			document.documentElement.classList.remove('dark');
 		}
 
-		window.sessionStorage.setItem('darkMode', darkMode ? '1' : '0');
+		if (typeof window !== 'undefined') window.sessionStorage.setItem('darkMode', darkMode ? '1' : '0');
 	}, [darkMode]);
 
 	return [darkMode, toggleTheme];

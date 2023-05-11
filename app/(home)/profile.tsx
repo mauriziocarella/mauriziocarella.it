@@ -11,7 +11,7 @@ export const Profile = ({className, ...props}: ProfileProps) => {
 		<div className={classNames('text-center px-2', className)} {...props}>
 			<div className="text-4xl my-3 font-medium">About me</div>
 			<div className="mx-auto rounded-full overflow-hidden shadow-xl" style={{maxWidth: 200}}>
-				<Image src={imgProfile} alt="Profile picture" layout="responsive" className="rounded-full overflow-hidden" />
+				<Image src={imgProfile} alt="Profile picture" className="rounded-full overflow-hidden" />
 			</div>
 
 			<div className="px-2 my-4">

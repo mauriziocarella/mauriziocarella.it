@@ -59,7 +59,7 @@ export const Tooltip = ({
 
 	const update = useCallback(() => {
 		if (typeof popper.update === 'function') popper.update().catch((err) => console.error(err));
-	}, [popper.update]);
+	}, [popper]);
 
 	useEffect(() => {
 		const mouseover = () => setVisible(true);
@@ -70,7 +70,7 @@ export const Tooltip = ({
 		referenceElement?.addEventListener('mouseleave', mouseleave, {passive: true});
 		referenceElement?.addEventListener('touchstart', touchstart, {passive: true});
 		referenceElement?.addEventListener('resize', update, {passive: true});
-		window.addEventListener('resize', update, {passive: true});
+		if (typeof window !== 'undefined') window.addEventListener('resize', update, {passive: true});
 
 		let resizeObserver: ResizeObserver;
 		try {
@@ -86,13 +86,13 @@ export const Tooltip = ({
 			referenceElement?.removeEventListener('mouseleave', mouseleave);
 			referenceElement?.removeEventListener('touchstart', touchstart);
 			referenceElement?.removeEventListener('resize', update);
-			window.removeEventListener('resize', update);
+			if (typeof window !== 'undefined') window.removeEventListener('resize', update);
 
 			if (referenceElement) {
 				resizeObserver?.unobserve(referenceElement);
 			}
 		};
-	}, [referenceElement, text, update]);
+	}, [_visible, referenceElement, text, update]);
 
 	useLayoutEffect(() => {
 		update();
@@ -176,14 +176,20 @@ export const Tooltip = ({
 };
 
 export const TooltipPortal = ({children}: {children: React.ReactNode}) => {
-	let element = document.getElementById('tooltip-portal');
+	let element;
 
-	if (!element) {
-		element = document.createElement('div');
-		element.id = 'tooltip-portal';
-		element.classList.add(...'z-[99999] fixed inset-0 pointer-events-none'.split(' '));
-		document.body.appendChild(element);
+	if (typeof document !== 'undefined') {
+		element = document.getElementById('tooltip-portal');
+
+		if (!element) {
+			element = document.createElement('div');
+			element.id = 'tooltip-portal';
+			element.classList.add(...'z-[99999] fixed inset-0 pointer-events-none'.split(' '));
+			document.body.appendChild(element);
+		}
 	}
+
+	if (!element) return children;
 
 	return createPortal(children, element);
 };
