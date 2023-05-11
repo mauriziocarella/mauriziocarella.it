@@ -59,7 +59,7 @@ export const Tooltip = ({
 
 	const update = useCallback(() => {
 		if (typeof popper.update === 'function') popper.update().catch((err) => console.error(err));
-	}, [popper]);
+	}, [popper.update]);
 
 	useEffect(() => {
 		const mouseover = () => setVisible(true);
