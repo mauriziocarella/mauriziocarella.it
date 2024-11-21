@@ -1,0 +1,9 @@
+services:
+    mauriziocarella.it:
+        platform: linux/amd64
+        image: registry.mauriziocarella.it/mauriziocarella.it:latest
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "3000:3000"

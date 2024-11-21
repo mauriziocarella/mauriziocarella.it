@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Password Generator",
+		"description": "Simple application to generate random password with criteria",
+		"url": "https://password.mauriziocarella.it"
+	},
+	{
+		"name": "UDID",
+		"description": "Get your Apple device UDIDs for development purpose",
+		"url": "https://udid.mauriziocarella.it"
+	},
+	{
+		"name": "Spotify Widget",
+		"description": "Pretty old (but still working) application to embed your Now Playing information from Spotify into your OBS setup",
+		"url": "https://apps.mauriziocarella.it/spotify"
+	},
+	{
+		"name": "Multi-Twitch",
+		"description": "Watch all your favorite streamers at the same time and follow the chat",
+		"url": "https://twitch.mauriziocarella.it/multi"
+	}
+]

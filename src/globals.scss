@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		--background: theme('colors.background.light');
+		--foreground: theme('colors.foreground.light');
+		--border-color: theme('colors.gray.300');
+
+		--primary: theme('colors.primary.DEFAULT');
+		--success: theme('colors.success.DEFAULT');
+
+		&.dark {
+			--background: theme('colors.background.dark');
+			--foreground: theme('colors.foreground.dark');
+			--border-color: theme('colors.gray.700');
+		}
+
+		color: var(--foreground);
+		background: var(--background);
+	}
+
+	html, body {
+		@apply min-h-screen;
+	}
+}
+
+@layer utilities {
+	@keyframes rotation {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}
+
+@layer components {
+	input {
+		&[type="checkbox"] {
+			&:checked {
+				@apply bg-primary-500 border-primary-500;
+				background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+			}
+
+			&:indeterminate, &.indeterminate, &[indeterminate] {
+				@apply bg-primary-500 border-primary-500;
+				background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
+			}
+
+			&:disabled, &.disabled, &[disabled] {
+				@apply opacity-60 cursor-default;
+			}
+		}
+	}
+}
