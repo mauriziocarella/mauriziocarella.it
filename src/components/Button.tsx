@@ -8,9 +8,9 @@ export const Button = ({className, color, ...props}: ButtonProps) => {
 	const colorClasses = useMemo(() => {
 		switch (color) {
 			case 'primary':
-				return 'bg-primary dark:bg-primary';
+				return 'bg-primary dark:bg-primary text-white dark:text-white focus-within:border-primary-600 ring-primary-600';
 			case 'success':
-				return 'bg-success dark:bg-success';
+				return 'bg-success dark:bg-success text-white dark:text-white focus-within:border-success-600 ring-success-600';
 		}
 	}, [color]);
 
