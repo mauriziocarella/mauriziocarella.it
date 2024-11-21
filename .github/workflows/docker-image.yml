@@ -27,7 +27,7 @@ jobs:
           registry: registry.mauriziocarella.it
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
@@ -39,3 +39,7 @@ jobs:
           tags: |
             registry.mauriziocarella.it/mauriziocarella.it:latest
             registry.mauriziocarella.it/mauriziocarella.it:${{ github.sha }}
+
+      - name: Trigger deployment via HTTP callback
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.WATCHTOWER_HTTP_API_TOKEN }}" "https://registry.mauriziocarella.it/update?image=registry.mauriziocarella.it/mauriziocarella.it"
