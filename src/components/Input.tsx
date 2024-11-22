@@ -84,7 +84,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 					</Label>
 				)}
 
-				<div className="flex items-center space-x-2">
+				<div className="flex flex-col xs:flex-row xs:items-center gap-2">
 					<div
 						className={clsx(
 							'group relative flex items-stretch min-w-[200px] min-h-[2.5rem] w-full sm:text-sm rounded-md overflow-hidden transition-all duration-100',
