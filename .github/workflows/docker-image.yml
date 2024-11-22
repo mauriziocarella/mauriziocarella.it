@@ -2,9 +2,8 @@ name: Build And Push Docker image
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -38,8 +37,13 @@ jobs:
           push: true
           tags: |
             registry.mauriziocarella.it/mauriziocarella.it:latest
-            registry.mauriziocarella.it/mauriziocarella.it:${{ github.sha }}
+            registry.mauriziocarella.it/mauriziocarella.it:${{ github.ref_name }}
+          build-args: |
+            APP_VERSION=${{ github.ref_name }}
 
+  update:
+    runs-on: ubuntu-latest
+    steps:
       - name: Trigger deployment via HTTP callback
         run: |
           curl -H "Authorization: Bearer ${{ secrets.WATCHTOWER_HTTP_API_TOKEN }}" "https://registry.mauriziocarella.it/update?image=registry.mauriziocarella.it/mauriziocarella.it"
