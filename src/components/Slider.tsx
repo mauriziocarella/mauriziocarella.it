@@ -1,4 +1,11 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+	MouseEvent,
+} from 'react';
 import clsx from '@/lib/clsx';
 import {Input, type InputProps} from '@/components/Input';
 import {setNativeValue} from '@/lib';
@@ -30,12 +37,14 @@ export const Slider = ({
 	const [grabbing, setGrabbing] = useState(false);
 
 	const setFromPosition = useCallback(
-		(posX: number) => {
+		(e: MouseEvent) => {
 			if (!containerRef) return;
 
-			posX = posX - containerRef.offsetLeft;
+			const rect = containerRef.getBoundingClientRect();
 
-			let value = (posX * (max - min)) / containerRef.offsetWidth;
+			const posX = e.clientX - rect.x;
+
+			let value = min + (posX / rect.width) * (max - min);
 
 			value = Math.min(Math.max(value, min), max);
 			value = value - (value % step);
@@ -45,10 +54,17 @@ export const Slider = ({
 		[containerRef, max, min, step],
 	);
 
+	const mousedown = useCallback(
+		(e: MouseEvent) => {
+			setGrabbing(true);
+			setFromPosition(e);
+		},
+		[setFromPosition],
+	);
 	const mousemove = useCallback(
 		(e: MouseEvent) => {
 			if (grabbing && containerRef && input.current) {
-				setFromPosition(e.clientX);
+				setFromPosition(e);
 			}
 		},
 		[containerRef, grabbing, setFromPosition],
@@ -67,7 +83,7 @@ export const Slider = ({
 	const width = useMemo(() => {
 		if (!containerRef) return 0;
 
-		const width = (value * containerRef.offsetWidth) / (max - min);
+		const width = ((value - min) / (max - min)) * containerRef.offsetWidth;
 
 		return Math.min(Math.max(width, 0), containerRef.offsetWidth);
 	}, [containerRef, max, min, value]);
@@ -93,7 +109,7 @@ export const Slider = ({
 			<div
 				ref={setContainerRef}
 				className="relative h-6 select-none"
-				onClick={(e) => setFromPosition(e.clientX)}>
+				onMouseDown={mousedown}>
 				<div className="absolute h-1 inset-x-0 bg-gray-300 dark:bg-gray-700 rounded-full top-1/2 -translate-y-1/2"></div>
 				<div
 					className="absolute h-1 bg-primary rounded-full top-1/2 -translate-y-1/2"
