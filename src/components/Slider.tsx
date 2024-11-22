@@ -1,16 +1,20 @@
+'use client';
+
 import React, {
+	MouseEvent,
+	TouchEvent,
 	useCallback,
 	useEffect,
 	useMemo,
 	useRef,
 	useState,
-	MouseEvent,
 } from 'react';
 import clsx from '@/lib/clsx';
 import {Input, type InputProps} from '@/components/Input';
 import {setNativeValue} from '@/lib';
 import {Label} from '@/components/Label';
 import {useEvent} from 'react-use';
+import useIsClient from '@/lib/hooks/useIsClient';
 import useStateRef from '@/lib/hooks/useStateRef';
 
 export type SliderProps = InputProps & {
@@ -29,6 +33,7 @@ export const Slider = ({
 	value: _value,
 	...props
 }: SliderProps) => {
+	const isClient = useIsClient();
 	const [value, setValue] = useState(_value ?? min);
 
 	const [containerRef, setContainerRef] = useStateRef<HTMLDivElement>();
@@ -37,12 +42,11 @@ export const Slider = ({
 	const [grabbing, setGrabbing] = useState(false);
 
 	const setFromPosition = useCallback(
-		(e: MouseEvent) => {
+		(clientX: number) => {
 			if (!containerRef) return;
 
 			const rect = containerRef.getBoundingClientRect();
-
-			const posX = e.clientX - rect.x;
+			const posX = clientX - rect.x;
 
 			let value = min + (posX / rect.width) * (max - min);
 
@@ -54,25 +58,49 @@ export const Slider = ({
 		[containerRef, max, min, step],
 	);
 
+	const touchstart = useCallback(
+		(e: TouchEvent) => {
+			setGrabbing(true);
+			setFromPosition(e.touches[0].clientX);
+		},
+		[setFromPosition],
+	);
+	const touchmove = useCallback(
+		(e: TouchEvent) => {
+			if (grabbing) {
+				e.preventDefault();
+				setFromPosition(e.touches[0].clientX);
+			}
+		},
+		[grabbing, setFromPosition],
+	);
+	const touchend = useCallback(() => {
+		setGrabbing(false);
+	}, []);
+
 	const mousedown = useCallback(
 		(e: MouseEvent) => {
 			setGrabbing(true);
-			setFromPosition(e);
+			setFromPosition(e.clientX);
 		},
 		[setFromPosition],
 	);
 	const mousemove = useCallback(
 		(e: MouseEvent) => {
-			if (grabbing && containerRef && input.current) {
-				setFromPosition(e);
+			if (grabbing) {
+				setFromPosition(e.clientX);
 			}
 		},
-		[containerRef, grabbing, setFromPosition],
+		[grabbing, setFromPosition],
 	);
 	const mouseup = useCallback(() => {
 		setGrabbing(false);
 	}, []);
 
+	useEvent('touchmove', touchmove, undefined, {
+		passive: false,
+	});
+	useEvent('touchend', touchend);
 	useEvent('mousemove', mousemove);
 	useEvent('mouseup', mouseup);
 
@@ -80,13 +108,11 @@ export const Slider = ({
 		if (typeof _value !== 'undefined') setValue(Number(_value));
 	}, [_value]);
 
-	const width = useMemo(() => {
-		if (!containerRef) return 0;
+	const percentage = useMemo(() => {
+		const percentage = ((value - min) / (max - min)) * 100;
 
-		const width = ((value - min) / (max - min)) * containerRef.offsetWidth;
-
-		return Math.min(Math.max(width, 0), containerRef.offsetWidth);
-	}, [containerRef, max, min, value]);
+		return Math.min(Math.max(percentage, 0), 100);
+	}, [max, min, value]);
 
 	return (
 		<div className={className}>
@@ -109,11 +135,14 @@ export const Slider = ({
 			<div
 				ref={setContainerRef}
 				className="relative h-6 select-none"
-				onMouseDown={mousedown}>
+				onMouseDown={mousedown}
+				onTouchStart={touchstart}>
 				<div className="absolute h-1 inset-x-0 bg-gray-300 dark:bg-gray-700 rounded-full top-1/2 -translate-y-1/2"></div>
 				<div
 					className="absolute h-1 bg-primary rounded-full top-1/2 -translate-y-1/2"
-					style={{width}}
+					style={{
+						width: isClient ? `${percentage}%` : 0,
+					}}
 				/>
 				<div
 					className={clsx(
@@ -122,7 +151,7 @@ export const Slider = ({
 					)}
 					onMouseDown={() => setGrabbing(true)}
 					style={{
-						left: width,
+						left: isClient ? `${percentage}%` : 0,
 					}}
 				/>
 			</div>
