@@ -81,6 +81,9 @@ export default {
 				modal: '700',
 				tooltip: '800',
 			},
+			screens: {
+				xs: '480px',
+			},
 		},
 	},
 	plugins: [

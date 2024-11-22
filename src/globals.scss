@@ -17,14 +17,26 @@
 			--border-color: theme('colors.gray.700');
 		}
 
-		color: var(--foreground);
-		background: var(--background);
+		@apply text-foreground bg-background;
 	}
 
 	html, body {
 		@apply min-h-screen;
 	}
 }
+
+@layer utilities {
+	.h-screen {
+		height: 100vh;
+		height: calc(var(--vh, 1vh) * 100);
+	}
+
+	.min-h-screen {
+		min-height: 100vh;
+		min-height: calc(var(--vh, 1vh) * 100);
+	}
+}
+
 
 @layer utilities {
 	@keyframes rotation {

@@ -1,6 +1,6 @@
 import type {PropsWithChildren} from 'react';
-import ReactQueryProvider from '@/utils/providers/react-query';
-import ThemeProvider from '@/utils/providers/theme';
+import ReactQueryProvider from '@/components/providers/react-query';
+import ThemeProvider from '@/components/providers/theme';
 
 const AppProviders = ({children}: PropsWithChildren) => (
 	<ThemeProvider>

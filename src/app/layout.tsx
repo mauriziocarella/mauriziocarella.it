@@ -1,7 +1,7 @@
 import '../globals.scss';
 import type {Metadata, Viewport} from 'next';
 import type {PropsWithChildren} from 'react';
-import AppProviders from '@/utils/providers';
+import AppProviders from '@/components/providers';
 import {Lato} from 'next/font/google';
 import clsx from '@/lib/clsx';
 import {generateMetadata} from '@/lib/site';
