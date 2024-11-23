@@ -7,6 +7,7 @@ import clsx from '@/lib/clsx';
 import {generateMetadata} from '@/lib/site';
 import {Analytics} from '@/components/Analytics';
 import {Footer} from '@/components/Footer';
+import {SiteHead} from '@/components/Site';
 
 const lato = Lato({
 	weight: ['100', '300', '400', '700', '900'],
@@ -22,32 +23,7 @@ export const viewport: Viewport = {
 
 const RootLayout = ({children}: PropsWithChildren) => (
 	<html className={clsx(lato.className)} lang="en" suppressHydrationWarning>
-		<head>
-			<link
-				rel="icon"
-				type="image/png"
-				href="/favicon-96x96.png"
-				sizes="96x96"
-			/>
-			<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-			<link rel="shortcut icon" href="/favicon.ico" />
-			<link
-				rel="apple-touch-icon"
-				sizes="180x180"
-				href="/apple-touch-icon.png"
-			/>
-			<meta
-				name="apple-mobile-web-app-title"
-				content="mauriziocarella.it"
-			/>
-			{Boolean(process.env.NEXT_PUBLIC_APP_VERSION) && (
-				<meta
-					name="version"
-					content={process.env.NEXT_PUBLIC_APP_VERSION}
-				/>
-			)}
-			<link rel="manifest" href="/site.webmanifest" />
-		</head>
+		<SiteHead />
 		<body className="flex flex-col">
 			<AppProviders>
 				<main className="flex flex-col flex-1">{children}</main>
