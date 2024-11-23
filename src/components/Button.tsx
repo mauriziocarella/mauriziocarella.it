@@ -21,7 +21,7 @@ export const Button = ({className, color, ...props}: ButtonProps) => {
 				'flex items-center justify-center gap-2 transition-colors rounded-lg px-4 py-2 outline-none',
 				'focus-within:ring-1 ring-primary',
 				'border focus-within:border-primary',
-				'bg-background-light text-foreground-light dark:bg-background-dark dark:text-foreground-dark',
+				'bg-background text-foreground',
 				'[&>svg]:w-5 [&>svg]:h-5',
 				colorClasses,
 				className,

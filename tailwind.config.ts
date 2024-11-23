@@ -66,16 +66,11 @@ export default {
 					900: '#0A6E4D',
 					950: '#096546',
 				},
-				background: {
-					DEFAULT: 'var(--background)',
-					light: '#ffffff',
-					dark: '#0d1117',
-				},
-				foreground: {
-					DEFAULT: 'var(--foreground)',
-					light: '#0d1117',
-					dark: '#ffffff',
-				},
+				white: '#ffffff',
+				background:
+					'rgb(from var(--color-background) r g b / <alpha-value>)',
+				foreground:
+					'rgb(from var(--color-foreground) r g b / <alpha-value>)',
 			},
 			zIndex: {
 				modal: '700',
