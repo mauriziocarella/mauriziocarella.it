@@ -1,6 +1,8 @@
 import type {Metadata} from 'next';
 
 export const Site = {
+	title: 'Maurizio Carella',
+	description: 'My personal website',
 	url: new URL('https://mauriziocarella.it'),
 };
 
@@ -10,8 +12,8 @@ export const generateMetadata = (
 	const {title} = metadata;
 
 	return {
-		description: 'My personal website',
+		description: Site.description,
 		...metadata,
-		title: [title, 'Maurizio Carella'].filter(Boolean).join(' • '),
+		title: [title, Site.title].filter(Boolean).join(' • '),
 	};
 };
