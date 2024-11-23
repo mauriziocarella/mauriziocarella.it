@@ -1,5 +1,8 @@
+'use client';
+
 import type {ComponentProps} from 'react';
 import clsx from '@/lib/clsx';
+import {motion} from 'framer-motion';
 
 export type LoadingIconProps = ComponentProps<'div'>;
 export const LoadingIcon = ({className, ...props}: LoadingIconProps) => {
@@ -13,3 +16,28 @@ export const LoadingIcon = ({className, ...props}: LoadingIconProps) => {
 		/>
 	);
 };
+
+export type LoadingOverlayProps = ComponentProps<typeof motion.div> & {
+	delay?: number;
+	duration?: number;
+};
+export const LoadingOverlay = ({
+	className,
+	delay = 0,
+	duration = 0.5,
+	...props
+}: LoadingOverlayProps) => (
+	<>
+		<motion.div
+			initial={{opacity: 0}}
+			animate={{opacity: 1}}
+			transition={{delay, duration}}
+			{...props}
+			className={clsx(
+				'absolute inset-0 flex justify-center items-center bg-background/80',
+				className,
+			)}>
+			<LoadingIcon />
+		</motion.div>
+	</>
+);
