@@ -12,7 +12,7 @@ import React, {
 } from 'react';
 import clsx from '@/lib/clsx';
 import useId from '@/lib/hooks/useId';
-import {EyeIcon, EyeOffIcon, XIcon} from 'lucide-react';
+import {EyeIcon, EyeOffIcon, type LucideProps, XIcon} from 'lucide-react';
 import {mergeRefs} from '@/lib';
 import {Label} from '@/components/Label';
 import useStateRef from '@/lib/hooks/useStateRef';
@@ -21,7 +21,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 	label?: string;
 	invalid?: boolean | string;
 	isClearable?: boolean;
-	icon?: ReactElement;
+	icon?: ReactElement<Pick<LucideProps, 'className' | 'onClick'>>;
 	LeftComponent?: ReactNode;
 	RightComponent?: ReactNode;
 	ActionComponent?: ReactNode;

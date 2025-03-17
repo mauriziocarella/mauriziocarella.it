@@ -1,21 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "./theme.css";
 
 @layer base {
 	html {
-		--color-background: theme(colors.white);
-		--color-foreground: #0d1117;
-		--border-color: theme(colors.gray.300);
-
-		--color-primary: theme(colors.primary.DEFAULT);
-		--color-success: theme(colors.success.DEFAULT);
-
-		&.dark {
-			--color-background: #0d1117;
-			--color-foreground: theme(colors.white);
-			--border-color: theme(colors.gray.700);
-		}
+		//--border-color: var(--color-gray-300);
+		//--border-color: var(--color-gray-700);
 
 		@apply text-foreground bg-background;
 	}

@@ -1,10 +1,11 @@
 import {Site} from '@/lib/site';
+import Head from 'next/head';
 
 export type SiteHeadProps = {
 	title?: string | boolean;
 };
 export const SiteHead = ({title}: SiteHeadProps) => (
-	<head>
+	<Head>
 		<link
 			rel="icon"
 			type="image/png"
@@ -32,5 +33,5 @@ export const SiteHead = ({title}: SiteHeadProps) => (
 		) : (
 			Boolean(title) && <title>{Site.title}</title>
 		)}
-	</head>
+	</Head>
 );

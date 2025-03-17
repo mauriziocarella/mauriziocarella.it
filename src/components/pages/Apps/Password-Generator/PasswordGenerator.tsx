@@ -30,7 +30,7 @@ const PasswordGenerator = () => {
 	);
 
 	const [copied, setCopied] = useState(false);
-	const copyTimeout = useRef<ReturnType<typeof setTimeout>>();
+	const copyTimeout = useRef<ReturnType<typeof setTimeout>>(null);
 
 	const input = useRef<HTMLInputElement>(null);
 
@@ -77,7 +77,7 @@ const PasswordGenerator = () => {
 	}, [password]);
 
 	useEffect(() => {
-		clearTimeout(copyTimeout.current);
+		if (copyTimeout.current) clearTimeout(copyTimeout.current);
 
 		if (copied) {
 			copyTimeout.current = setTimeout(() => setCopied(false), 1500);
