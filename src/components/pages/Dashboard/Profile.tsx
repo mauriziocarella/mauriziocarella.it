@@ -38,7 +38,8 @@ const ScrollTo = () => {
 				y <= height * 0.1 && 'opacity-100',
 			)}>
 			<button
-				className="p"
+				type="button"
+				className="p cursor-pointer"
 				onClick={handleScroll}
 				aria-label="Scroll to bottom">
 				<ArrowDownIcon className="animate-bounce" />

@@ -17,6 +17,7 @@ export const Button = ({className, color, ...props}: ButtonProps) => {
 	return (
 		<button
 			type="button"
+			{...props}
 			className={clsx(
 				'flex items-center justify-center gap-2 transition-colors rounded-lg px-4 py-2 outline-none cursor-pointer',
 				'focus-within:ring-1 ring-primary',
@@ -26,7 +27,6 @@ export const Button = ({className, color, ...props}: ButtonProps) => {
 				colorClasses,
 				className,
 			)}
-			{...props}
 		/>
 	);
 };
