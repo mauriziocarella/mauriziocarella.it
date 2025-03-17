@@ -11,6 +11,16 @@
 	html, body {
 		@apply min-h-screen;
 	}
+
+	* {
+		@apply duration-300;
+	}
+}
+
+@layer utilities {
+	.gap {
+		@apply gap-2;
+	}
 }
 
 @layer utilities {

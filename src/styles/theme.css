@@ -42,6 +42,11 @@
     --color-success-800: #0B815A;
     --color-success-900: #0A6E4D;
     --color-success-950: #096546;
+
+    --z-modal: 700;
+    --z-tooltip: 800;
+
+    --breakpoint-xs: 480px;
 }
 
 @layer theme {
