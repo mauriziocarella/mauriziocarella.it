@@ -3,7 +3,9 @@ import type {Metadata} from 'next';
 export const Site = {
 	title: 'Maurizio Carella',
 	description: 'My personal website',
-	url: new URL('https://mauriziocarella.it'),
+	url: new URL(
+		process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mauriziocarella.it',
+	),
 };
 
 export const generateMetadata = (
