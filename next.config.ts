@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
 	sassOptions: {
 		silenceDeprecations: ['legacy-js-api'],
 	},
+	images: {
+		localPatterns: [
+			{
+				pathname: '/images/**',
+				search: '',
+			},
+		],
+	},
 };
 
 const withBundleAnalyzer = bundleAnalyzer({

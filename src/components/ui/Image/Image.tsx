@@ -30,7 +30,6 @@ const Image = ({
 			)}>
 			<NextImage
 				fill
-				sizes="100vh"
 				{...props}
 				src={src}
 				className={clsx(

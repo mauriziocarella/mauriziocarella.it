@@ -12,9 +12,14 @@ import GitHubIcon from '@/components/ui/Icons/Brand/GitHubIcon';
 
 const Profile = () => {
 	return (
-		<div className="flex flex-col gap justify-center items-center text-center h-screen relative">
-			<div className="w-48 h-48 mb-4 rounded-full p-8 bg-background-700 hover:scale-105">
-				<Image src="/images/logo.png" alt="Logo" priority />
+		<div className="flex flex-col gap justify-center items-center text-center h-screen relative p-2">
+			<div className="w-full aspect-square max-w-32 mb-4 rounded-full p-6 bg-background-700 hover:scale-105">
+				<Image
+					src="/images/logo.png"
+					alt="Logo"
+					priority
+					sizes="(max-width: 768px) 100vw, 50vw"
+				/>
 			</div>
 
 			<div className="text-3xl">Maurizio Carella</div>
