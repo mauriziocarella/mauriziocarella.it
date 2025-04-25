@@ -37,10 +37,12 @@ const Socials = ({className}: SocialsProps) => {
 		() => [
 			{
 				url: 'https://github.com/mauriziocarella',
+				title: 'GitHub Profile',
 				icon: GitHubIcon,
 			},
 			{
 				url: 'mailto:info@mauriziocarella.it',
+				title: 'Email',
 				icon: MailIcon,
 			},
 		],
@@ -57,6 +59,7 @@ const Socials = ({className}: SocialsProps) => {
 				<Link
 					key={social.url}
 					href={social.url}
+					title={social.title}
 					target="_blank"
 					className="text-inherit">
 					<Icon name={social.icon} className="size-6" />
