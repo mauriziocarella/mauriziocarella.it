@@ -1,6 +1,14 @@
 'use client';
 
-import React, {MouseEvent, TouchEvent, useCallback, useEffect, useMemo, useRef, useState,} from 'react';
+import React, {
+	MouseEvent,
+	TouchEvent,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 import clsx from '@/lib/clsx';
 import {Input, type InputProps} from '@/components/ui/Input/Input';
 import {setNativeValue} from '@/lib';

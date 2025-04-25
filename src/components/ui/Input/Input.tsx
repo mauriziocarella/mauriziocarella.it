@@ -1,4 +1,13 @@
-import React, {cloneElement, type ComponentProps, forwardRef, type ReactElement, type ReactNode, useEffect, useMemo, useState,} from 'react';
+import React, {
+	cloneElement,
+	type ComponentProps,
+	forwardRef,
+	type ReactElement,
+	type ReactNode,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 import clsx from '@/lib/clsx';
 import useId from '@/lib/hooks/useId';
 import {EyeIcon, EyeOffIcon, type LucideProps, XIcon} from 'lucide-react';
