@@ -61,7 +61,7 @@ const Socials = ({className}: SocialsProps) => {
 					href={social.url}
 					title={social.title}
 					target="_blank"
-					className="text-inherit">
+					className="text-inherit hover:text-accent">
 					<Icon name={social.icon} className="size-6" />
 				</Link>
 			))}

@@ -39,18 +39,18 @@
     --color-secondary-900: oklch(42.398% 0.20684 316.85);
     --color-secondary-950: oklch(38.746% 0.18869 317.18);
 
-    --color-accent: oklch(60.917% 0.20246 348.9);
-    --color-accent-50: oklch(74.46% 0.12794 344.77);
-    --color-accent-100: oklch(72.799% 0.13635 345.38);
-    --color-accent-200: oklch(69.46% 0.15514 345.95);
-    --color-accent-300: oklch(66.297% 0.17295 346.66);
-    --color-accent-400: oklch(63.609% 0.18857 347.9);
-    --color-accent-500: oklch(60.917% 0.20246 348.9);
-    --color-accent-600: oklch(56.909% 0.20561 350.37);
-    --color-accent-700: oklch(51.61% 0.18548 350.26);
-    --color-accent-800: oklch(46.255% 0.1637 350.21);
-    --color-accent-900: oklch(40.661% 0.14221 350.04);
-    --color-accent-950: oklch(37.726% 0.13102 349.35);
+    --color-accent: oklch(51.61% 0.18548 350.26);
+    --color-accent-50: oklch(64.977% 0.18111 347.62);
+    --color-accent-100: oklch(63.609% 0.18857 347.9);
+    --color-accent-200: oklch(60.917% 0.20246 348.9);
+    --color-accent-300: oklch(58.496% 0.2126 350.51);
+    --color-accent-400: oklch(55.199% 0.19903 350.57);
+    --color-accent-500: oklch(51.61% 0.18548 350.26);
+    --color-accent-600: oklch(47.959% 0.17167 349.89);
+    --color-accent-700: oklch(44.495% 0.15723 349.91);
+    --color-accent-800: oklch(40.661% 0.14221 350.04);
+    --color-accent-900: oklch(36.781% 0.12731 349.49);
+    --color-accent-950: oklch(34.874% 0.1198 349.79);
 
     --color-success: oklch(80.035% 0.18206 151.71);
     --color-success-50: oklch(85.557% 0.13148 154.7);
@@ -123,6 +123,19 @@
         --color-background-800: oklch(21.342% 0 0);
         --color-background-900: oklch(23.503% 0 0);
         --color-background-950: oklch(24.776% 0 0);
+
+        --color-accent: oklch(60.917% 0.20246 348.9);
+        --color-accent-50: oklch(74.46% 0.12794 344.77);
+        --color-accent-100: oklch(72.799% 0.13635 345.38);
+        --color-accent-200: oklch(69.46% 0.15514 345.95);
+        --color-accent-300: oklch(66.297% 0.17295 346.66);
+        --color-accent-400: oklch(63.609% 0.18857 347.9);
+        --color-accent-500: oklch(60.917% 0.20246 348.9);
+        --color-accent-600: oklch(56.909% 0.20561 350.37);
+        --color-accent-700: oklch(51.61% 0.18548 350.26);
+        --color-accent-800: oklch(46.255% 0.1637 350.21);
+        --color-accent-900: oklch(40.661% 0.14221 350.04);
+        --color-accent-950: oklch(37.726% 0.13102 349.35);
     }
 }
 
