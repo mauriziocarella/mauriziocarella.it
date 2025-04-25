@@ -3,7 +3,7 @@
 import {useTheme} from 'next-themes';
 import {useCallback, useEffect, useState} from 'react';
 import {MoonIcon, SunIcon, SunMoonIcon} from 'lucide-react';
-import {IconButton} from '@/components/Button';
+import {IconButton} from '@/components/ui/Button/Button';
 import {AnimatePresence, motion} from 'framer-motion';
 
 export const ThemeToggle = () => {

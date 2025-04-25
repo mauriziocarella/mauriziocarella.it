@@ -1,9 +1,4 @@
-import React, {
-	type ComponentProps,
-	type ElementType,
-	type PropsWithChildren,
-	ReactNode,
-} from 'react';
+import React, {type ComponentProps, type ElementType, type PropsWithChildren, ReactNode,} from 'react';
 import clsx from '@/lib/clsx';
 
 export type TooltipProps<Element extends ElementType> = PropsWithChildren<

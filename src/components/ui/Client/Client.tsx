@@ -1,5 +1,5 @@
 import {type PropsWithChildren, useEffect, useState} from 'react';
-import {LoadingIcon} from '@/components/Loading';
+import {LoadingIcon} from '@/components/ui/Loading/Loading';
 
 export type ClientOnlyProps = PropsWithChildren;
 export const ClientOnly = ({children}: ClientOnlyProps) => {

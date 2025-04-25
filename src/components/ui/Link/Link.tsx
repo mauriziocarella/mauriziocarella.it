@@ -7,7 +7,7 @@ export const Link = ({className, ...props}: LinkProps) => {
 	return (
 		<ReactLink
 			className={clsx(
-				'inline-block text-accent hover:underline font-medium',
+				'inline-flex items-center gap-2 text-accent hover:underline underline-offset-2 font-medium',
 				className,
 			)}
 			{...props}

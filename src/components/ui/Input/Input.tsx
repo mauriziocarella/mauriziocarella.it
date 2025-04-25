@@ -1,32 +1,25 @@
-import React, {
-	cloneElement,
-	type ComponentProps,
-	forwardRef,
-	type InputHTMLAttributes,
-	type ReactElement,
-	type ReactNode,
-	type TextareaHTMLAttributes,
-	useEffect,
-	useMemo,
-	useState,
-} from 'react';
+import React, {cloneElement, type ComponentProps, forwardRef, type ReactElement, type ReactNode, useEffect, useMemo, useState,} from 'react';
 import clsx from '@/lib/clsx';
 import useId from '@/lib/hooks/useId';
 import {EyeIcon, EyeOffIcon, type LucideProps, XIcon} from 'lucide-react';
 import {mergeRefs} from '@/lib';
-import {Label} from '@/components/Label';
+import {Label} from '@/components/ui/Label/Label';
 import useStateRef from '@/lib/hooks/useStateRef';
+import type {Extend} from '#/@types';
 
-export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-	label?: string;
-	invalid?: boolean | string;
-	isClearable?: boolean;
-	icon?: ReactElement<Pick<LucideProps, 'className' | 'onClick'>>;
-	LeftComponent?: ReactNode;
-	RightComponent?: ReactNode;
-	ActionComponent?: ReactNode;
-	inputProps?: ComponentProps<'input'>;
-};
+export type InputProps = Extend<
+	ComponentProps<'input'>,
+	{
+		label?: string;
+		invalid?: boolean | string;
+		isClearable?: boolean;
+		icon?: ReactElement<Pick<LucideProps, 'className' | 'onClick'>>;
+		LeftComponent?: ReactNode;
+		RightComponent?: ReactNode;
+		ActionComponent?: ReactNode;
+		inputProps?: ComponentProps<'input'>;
+	}
+>;
 export const Input = forwardRef<HTMLInputElement, InputProps>(
 	(
 		{
@@ -163,35 +156,3 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 	},
 );
 Input.displayName = 'Input';
-
-export type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
-	label?: string;
-};
-export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-	({label, id: _id, className, ...props}, ref) => {
-		const id = useId(_id);
-
-		return (
-			<div className={className}>
-				{label && (
-					<label
-						htmlFor={id}
-						className="block text-sm font-medium text-gray-700 mb-1">
-						{label}
-					</label>
-				)}
-
-				<textarea
-					ref={ref}
-					id={id}
-					className={clsx(
-						'block min-h-[2.5rem] min-w-[200px] w-full sm:text-sm p-2 border border-gray-300 shadow-sm rounded-md transition-all outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary',
-						className,
-					)}
-					{...props}
-				/>
-			</div>
-		);
-	},
-);
-TextArea.displayName = 'TextArea';

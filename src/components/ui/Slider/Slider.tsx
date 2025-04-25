@@ -1,18 +1,10 @@
 'use client';
 
-import React, {
-	MouseEvent,
-	TouchEvent,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from 'react';
+import React, {MouseEvent, TouchEvent, useCallback, useEffect, useMemo, useRef, useState,} from 'react';
 import clsx from '@/lib/clsx';
-import {Input, type InputProps} from '@/components/Input';
+import {Input, type InputProps} from '@/components/ui/Input/Input';
 import {setNativeValue} from '@/lib';
-import {Label} from '@/components/Label';
+import {Label} from '@/components/ui/Label/Label';
 import {useEvent} from 'react-use';
 import useIsClient from '@/lib/hooks/useIsClient';
 import useStateRef from '@/lib/hooks/useStateRef';

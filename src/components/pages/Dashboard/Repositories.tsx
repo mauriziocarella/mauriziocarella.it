@@ -2,9 +2,11 @@
 
 import useQuery from '@/lib/hooks/useQuery';
 import {getRepositoriesQuery} from '@/lib/queries/repositories';
-import {Card} from '@/components/Card';
-import {Link} from '@/components/Link';
-import {LoadingIcon} from '@/components/Loading';
+import {Card} from '@/components/ui/Card/Card';
+import {Link} from '@/components/ui/Link/Link';
+import {LoadingIcon} from '@/components/ui/Loading/Loading';
+import {MoveRightIcon, StarIcon} from 'lucide-react';
+import Icon from '@/components/ui/Icons/Icon';
 
 export default function Repositories() {
 	const {data: repositories, isLoading} = useQuery(getRepositoriesQuery);
@@ -31,11 +33,21 @@ export default function Repositories() {
 									<p className="flex-1 opacity-80 mt-2">
 										{repository.description}
 									</p>
+
+									<div className="flex flex-wrap mt-2">
+										{repository.stars > 0 && (
+											<Icon name={StarIcon}>
+												{repository.stars}
+											</Icon>
+										)}
+									</div>
+
 									<Link
 										href={repository.url}
 										target="_blank"
 										className="mt-4">
-										View on GitHub →
+										View on GitHub
+										<Icon name={MoveRightIcon} />
 									</Link>
 								</Card>
 							))}

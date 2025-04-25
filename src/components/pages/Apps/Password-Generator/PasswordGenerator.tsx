@@ -2,16 +2,16 @@
 
 import {useCopyToClipboard, useEvent, useLocalStorage} from 'react-use';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Card} from '@/components/Card';
-import {Slider} from '@/components/Slider';
-import {Checkbox} from '@/components/Checkbox';
-import {Input} from '@/components/Input';
-import {Button} from '@/components/Button';
+import {Card} from '@/components/ui/Card/Card';
+import {Slider} from '@/components/ui/Slider/Slider';
+import {Checkbox} from '@/components/ui/Checkbox/Checkbox';
+import {Input} from '@/components/ui/Input/Input';
+import {Button} from '@/components/ui/Button/Button';
 import {ClipboardCheckIcon, ClipboardIcon, LightbulbIcon} from 'lucide-react';
-import {KeyboardShortcut} from '@/components/Shortcut';
-import {ClientLoader, ClientOnly} from '@/components/Client';
+import {KeyboardShortcut} from '@/components/ui/Shortcut/Shortcut';
+import {ClientLoader, ClientOnly} from '@/components/ui/Client/Client';
 import useNavigator from '@/lib/hooks/useNavigator';
-import Slide from '@/components/animations/Slide';
+import Slide from '@/components/ui/Animations/Slide';
 
 const PasswordGenerator = () => {
 	const [, setClipboard] = useCopyToClipboard();
@@ -110,6 +110,7 @@ const PasswordGenerator = () => {
 							onChange={(e) =>
 								setLength(Number(e.currentTarget.value))
 							}
+							aria-label="Password length"
 						/>
 
 						<div className=" gap-2">
@@ -151,7 +152,7 @@ const PasswordGenerator = () => {
 						readOnly
 						ActionComponent={
 							<Button
-								color={copied ? 'success' : 'default'}
+								color={copied ? 'success' : undefined}
 								onClick={copy}>
 								{copied ? (
 									<>
@@ -202,7 +203,7 @@ const Hints = () => {
 						<KeyboardShortcut>
 							{isMac ? 'cmd' : 'ctrl'} + c
 						</KeyboardShortcut>{' '}
-						to fast-copy generated password
+						to quick-copy generated password
 					</div>
 				</Slide>
 			)}

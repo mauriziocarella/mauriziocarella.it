@@ -1,8 +1,11 @@
 'use client';
 
-import {Card} from '@/components/Card';
-import {Link} from '@/components/Link';
+import {Card} from '@/components/ui/Card/Card';
+import {Link} from '@/components/ui/Link/Link';
 import {useMemo} from 'react';
+import {Site} from '@/lib/site';
+import Icon from '@/components/ui/Icons/Icon';
+import {MoveRightIcon} from 'lucide-react';
 
 export default function Apps() {
 	const apps = useMemo(
@@ -11,7 +14,7 @@ export default function Apps() {
 				id: 1,
 				name: 'Password Generator',
 				description: 'Simple offline password generator',
-				url: '/password-generator',
+				url: '/apps/password-generator',
 			},
 		],
 		[],
@@ -32,10 +35,10 @@ export default function Apps() {
 								{app.description}
 							</p>
 							<Link
-								href={`/apps/${app.url}`}
+								href={new URL(app.url, Site.url)}
 								target="_blank"
 								className="mt-4">
-								View App →
+								View App <Icon name={MoveRightIcon} />
 							</Link>
 						</Card>
 					))}

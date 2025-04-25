@@ -1,18 +1,18 @@
 import {type ComponentProps, useMemo} from 'react';
 import clsx from '@/lib/clsx';
 
+const colors = {
+	primary:
+		'bg-primary dark:bg-primary text-white dark:text-white border-primary-600 focus-within:border-primary-600 ring-primary-600',
+	success:
+		'bg-success dark:bg-success text-white dark:text-white border-success-600 focus-within:border-success-600 ring-success-600',
+} as const;
+
 export type ButtonProps = ComponentProps<'button'> & {
-	color?: 'primary' | 'success' | 'default';
+	color?: keyof typeof colors;
 };
 export const Button = ({className, color, ...props}: ButtonProps) => {
-	const colorClasses = useMemo(() => {
-		switch (color) {
-			case 'primary':
-				return 'bg-primary dark:bg-primary text-white dark:text-white border-primary-600 focus-within:border-primary-600 ring-primary-600';
-			case 'success':
-				return 'bg-success dark:bg-success text-white dark:text-white border-success-600 focus-within:border-success-600 ring-success-600';
-		}
-	}, [color]);
+	const colorClasses = useMemo(() => (color ? colors[color] : ''), [color]);
 
 	return (
 		<button

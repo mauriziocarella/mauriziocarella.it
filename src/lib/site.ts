@@ -3,6 +3,7 @@ import type {Metadata} from 'next';
 export const Site = {
 	title: 'Maurizio Carella',
 	description: 'My personal website',
+	name: 'mauriziocarella.it',
 	url: new URL(
 		process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mauriziocarella.it',
 	),
@@ -20,9 +21,12 @@ export const generateMetadata = (
 		other: {
 			version: process.env.NEXT_PUBLIC_APP_VERSION,
 		},
+		appleWebApp: {
+			title: Site.title,
+		},
 		icons: {
-			icon: '/icons/icon-192x192.png',
-			apple: '/icons/icon-512x512.png',
+			icon: '/icons/favicon.ico',
+			apple: '/icons/apple-icon.png',
 		},
 	};
 };

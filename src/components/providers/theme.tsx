@@ -2,7 +2,7 @@
 
 import {ThemeProvider as ReactThemeProvider} from 'next-themes';
 import {type PropsWithChildren, useCallback} from 'react';
-import {ThemeToggle} from '@/components/Theme';
+import {ThemeToggle} from '@/components/ui/Theme/Theme';
 import {useEvent, useMount} from 'react-use';
 
 const ThemeProvider = ({children}: PropsWithChildren) => {

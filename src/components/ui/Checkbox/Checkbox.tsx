@@ -1,7 +1,7 @@
 import React, {type ComponentProps, forwardRef, type ReactNode} from 'react';
 import useId from '@/lib/hooks/useId';
 import clsx from '@/lib/clsx';
-import {Label} from '@/components/Label';
+import {Label} from '@/components/ui/Label/Label';
 
 type CheckboxProps = ComponentProps<'input'> & {
 	label?: ReactNode;
