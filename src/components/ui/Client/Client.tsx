@@ -1,3 +1,5 @@
+'use client';
+
 import {type PropsWithChildren, useEffect, useState} from 'react';
 import {LoadingIcon} from '@/components/ui/Loading/Loading';
 
