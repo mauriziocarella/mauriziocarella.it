@@ -16,6 +16,12 @@ export default function Apps() {
 				description: 'Simple offline password generator',
 				url: '/apps/password-generator',
 			},
+			{
+				id: 2,
+				name: 'Beam!',
+				description: 'Share text or links via qrcode or public list',
+				url: 'https://beam.mauriziocarella.it',
+			},
 		],
 		[],
 	);
