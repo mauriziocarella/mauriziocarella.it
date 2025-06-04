@@ -1,4 +1,4 @@
-import '../styles/globals.scss';
+import '../styles/globals.css';
 import type {Metadata, Viewport} from 'next';
 import {type PropsWithChildren, Suspense} from 'react';
 import AppProviders from '@/components/providers';

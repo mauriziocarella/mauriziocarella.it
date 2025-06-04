@@ -158,7 +158,7 @@
         ::before,
         ::backdrop,
         ::file-selector-button {
-            @apply border-gray-700;
+            @apply border-neutral-800;
         }
     }
 }
