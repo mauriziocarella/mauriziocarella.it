@@ -12,6 +12,7 @@
     --color-background-800: oklch(93.1% 0 0);
     --color-background-900: oklch(90.67% 0 0);
     --color-background-950: oklch(89.755% 0 0);
+    --color-spotlight: oklch(80% 0 0);
 
     --color-primary: oklch(59.141% 0.26438 299.86);
     --color-primary-50: oklch(71.816% 0.1828 304.36);
@@ -123,6 +124,7 @@
         --color-background-800: oklch(21.342% 0 0);
         --color-background-900: oklch(23.503% 0 0);
         --color-background-950: oklch(24.776% 0 0);
+        --color-spotlight: oklch(35% 0 0);
 
         --color-accent: oklch(60.917% 0.20246 348.9);
         --color-accent-50: oklch(74.46% 0.12794 344.77);

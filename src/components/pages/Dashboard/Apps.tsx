@@ -6,6 +6,8 @@ import {useMemo} from 'react';
 import {Site} from '@/lib/site';
 import Icon from '@/components/ui/Icons/Icon';
 import {MoveRightIcon} from 'lucide-react';
+import {SpotlightCard} from '@/components/ui/Card/SpotlightCard';
+import {Container3D} from '@/components/ui/Containers/Container3D';
 
 export default function Apps() {
 	const apps = useMemo(
@@ -33,7 +35,10 @@ export default function Apps() {
 
 				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 					{apps?.map((app) => (
-						<Card key={app.id} className="flex flex-col">
+						<SpotlightCard
+							as={Container3D}
+							key={app.id}
+							className="flex flex-col">
 							<h2 className="text-xl font-semibold">
 								{app.name}
 							</h2>
@@ -46,7 +51,7 @@ export default function Apps() {
 								className="mt-4">
 								View App <Icon name={MoveRightIcon} />
 							</Link>
-						</Card>
+						</SpotlightCard>
 					))}
 				</div>
 			</div>

@@ -2,11 +2,12 @@
 
 import useQuery from '@/lib/hooks/useQuery';
 import {getRepositoriesQuery} from '@/lib/queries/repositories';
-import {Card} from '@/components/ui/Card/Card';
 import {Link} from '@/components/ui/Link/Link';
 import {LoadingIcon} from '@/components/ui/Loading/Loading';
 import {MoveRightIcon, StarIcon} from 'lucide-react';
 import Icon from '@/components/ui/Icons/Icon';
+import {SpotlightCard} from '@/components/ui/Card/SpotlightCard';
+import {Container3D} from '@/components/ui/Containers/Container3D';
 
 export default function Repositories() {
 	const {data: repositories, isLoading} = useQuery(getRepositoriesQuery);
@@ -24,7 +25,8 @@ export default function Repositories() {
 					) : (
 						<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 							{repositories?.map((repository) => (
-								<Card
+								<SpotlightCard
+									as={Container3D}
 									key={repository.id}
 									className="flex flex-col">
 									<h2 className="text-xl font-semibold">
@@ -49,7 +51,7 @@ export default function Repositories() {
 										View on GitHub
 										<Icon name={MoveRightIcon} />
 									</Link>
-								</Card>
+								</SpotlightCard>
 							))}
 						</div>
 					)}
