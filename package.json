@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"test": "npx tsc --noEmit"
+		"test": "npx tsc --noEmit && next lint"
 	},
 	"dependencies": {
 		"@next/third-parties": "^15.3.1",
