@@ -1,13 +1,7 @@
 'use client';
 
 import {ArrowDownIcon, MailIcon} from 'lucide-react';
-import {
-	type PropsWithChildren,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-} from 'react';
+import {useCallback, useMemo} from 'react';
 import {useWindowScroll, useWindowSize} from 'react-use';
 import clsx from '@/lib/clsx';
 import {ClientOnly} from '@/components/ui/Client/Client';

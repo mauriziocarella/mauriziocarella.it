@@ -1,6 +1,5 @@
 'use client';
 
-import {Card} from '@/components/ui/Card/Card';
 import {Link} from '@/components/ui/Link/Link';
 import {useMemo} from 'react';
 import {Site} from '@/lib/site';
