@@ -84,7 +84,7 @@ export const SpotlightCard = <As extends ElementType = 'div'>({
 					background: `radial-gradient(circle at ${position.x}px ${position.y}px, var(--color-spotlight), transparent 80%)`,
 				}}
 			/>
-			<div className={clsx('relative', className)}>{children}</div>
+			<div className={clsx('relative h-full', className)}>{children}</div>
 		</Component>
 	);
 };
