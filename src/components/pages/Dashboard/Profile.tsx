@@ -20,9 +20,10 @@ const Profile = () => {
 			className="flex flex-col gap justify-center items-center text-center p-2">
 			<SpotlightCard
 				as={Container3D}
-				className="flex flex-col gap justify-center items-center text-center px-8 py-6"
+				containerClassName="px-8 py-6 backdrop-blur-[2px] bg-background/10"
+				className="flex flex-col gap-4 justify-center items-center text-center"
 				rotation={20}>
-				<div className="w-full aspect-square max-w-32 mb-4 rounded-full p-6 bg-background-700">
+				<div className="w-full aspect-square max-w-32 mb-4 rounded-full">
 					<Image
 						src="/images/logo.png"
 						alt="Logo"

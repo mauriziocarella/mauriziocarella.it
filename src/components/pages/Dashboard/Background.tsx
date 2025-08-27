@@ -294,9 +294,8 @@ const Background = ({
 		<div className={clsx('relative overflow-hidden', containerClassName)}>
 			<canvas
 				ref={canvasRef}
-				className="block w-full h-full opacity-25"
+				className="block w-full h-full opacity-35 mask-b-to-100%"
 			/>
-			<div className="absolute inset-0 size-full pointer-events-none bg-gradient-to-b from-transparent to-background" />
 			<div className={clsx('absolute inset-0 size-full', className)}>
 				{children}
 			</div>

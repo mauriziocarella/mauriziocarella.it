@@ -1,10 +1,16 @@
-import type {ComponentProps} from 'react';
+import {type ElementType, forwardRef} from 'react';
 import clsx from '@/lib/clsx';
+import type {PolymorphicProps, PolymorphicRef} from '#/@types';
 
-export type CardProps = ComponentProps<'div'>;
-export const Card = ({className, ...props}: CardProps) => {
+export type CardProps<As extends ElementType> = PolymorphicProps<As>;
+export const Card = forwardRef(function Card<As extends ElementType>(
+	{as, className, ...props}: CardProps<As>,
+	ref: PolymorphicRef<As>,
+) {
+	const Component = as ?? 'div';
 	return (
-		<div
+		<Component
+			ref={ref}
 			className={clsx(
 				'border bg-background-800 rounded-2xl p-6',
 				className,
@@ -12,4 +18,4 @@ export const Card = ({className, ...props}: CardProps) => {
 			{...props}
 		/>
 	);
-};
+});

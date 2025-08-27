@@ -3,25 +3,24 @@
 import React, {
 	type ElementType,
 	type MouseEventHandler,
-	type PropsWithChildren,
 	useCallback,
 	useRef,
 	useState,
 } from 'react';
 import clsx from '@/lib/clsx';
-import type {PolymorphicProps} from '#/@types';
+import type {Extend} from '#/@types';
+import {Card, type CardProps} from '@/components/ui/Card/Card';
 
 type Position = {
 	x: number;
 	y: number;
 };
 
-export type SpotlightCardProps<As extends ElementType> = PolymorphicProps<
-	As,
-	PropsWithChildren<{
-		className?: string;
+export type SpotlightCardProps<As extends ElementType> = Extend<
+	CardProps<As>,
+	{
 		containerClassName?: string;
-	}>
+	}
 >;
 export const SpotlightCard = <As extends ElementType = 'div'>({
 	as,
@@ -65,7 +64,8 @@ export const SpotlightCard = <As extends ElementType = 'div'>({
 	}, []);
 
 	return (
-		<Component
+		<Card
+			as={Component}
 			{...props}
 			ref={divRef}
 			onMouseMove={handleMouseMove}
@@ -73,18 +73,15 @@ export const SpotlightCard = <As extends ElementType = 'div'>({
 			onBlur={handleBlur}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
-			className={clsx(
-				'relative border bg-background-800 rounded-2xl overflow-hidden p-6',
-				containerClassName,
-			)}>
+			className={clsx('relative overflow-hidden', containerClassName)}>
 			<div
 				className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out z-0"
 				style={{
 					opacity,
-					background: `radial-gradient(circle at ${position.x}px ${position.y}px, var(--color-spotlight), transparent 80%)`,
+					background: `radial-gradient(circle at ${position.x}px ${position.y}px, var(--color-spotlight), transparent)`,
 				}}
 			/>
 			<div className={clsx('relative h-full', className)}>{children}</div>
-		</Component>
+		</Card>
 	);
 };

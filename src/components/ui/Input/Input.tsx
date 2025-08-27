@@ -90,6 +90,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 					<div
 						className={clsx(
 							'group relative flex items-stretch min-w-[200px] min-h-[2.5rem] w-full sm:text-sm rounded-md overflow-hidden transition-all duration-100',
+							'bg-background',
 							// 'focus-within:outline outline-primary outline-offset-2',
 							'focus-within:ring-1 ring-primary',
 							'border focus-within:border-primary',
