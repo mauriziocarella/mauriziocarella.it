@@ -4,16 +4,21 @@ import type {ComponentProps} from 'react';
 import clsx from '@/lib/clsx';
 import {motion} from 'framer-motion';
 
-export type LoadingIconProps = ComponentProps<'div'>;
+export type LoadingIconProps = ComponentProps<'svg'>;
 export const LoadingIcon = ({className, ...props}: LoadingIconProps) => {
 	return (
-		<div
-			className={clsx(
-				'w-12 h-12 border-2 border-stone-900 dark:border-white border-b-transparent dark:border-b-transparent rounded-full animate-[rotation_1s_linear_infinite]',
-				className,
-			)}
+		<svg
+			viewBox="0 0 24 24"
 			{...props}
-		/>
+			className={clsx('size-12 text-secondary animate-spin', className)}
+			fill="none">
+			<path
+				d="M12 4a8 8 0 1 1 -8 8"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+			/>
+		</svg>
 	);
 };
 
