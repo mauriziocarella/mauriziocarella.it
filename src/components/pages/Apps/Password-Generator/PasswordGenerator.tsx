@@ -63,7 +63,8 @@ const PasswordGenerator = () => {
 	}, [setClipboard]);
 
 	useEffect(() => {
-		generate();
+		const timeout = setTimeout(generate, 0);
+		return () => clearTimeout(timeout);
 	}, [generate]);
 
 	const selected = useRef(false);

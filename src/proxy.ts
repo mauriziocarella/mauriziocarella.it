@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from 'next/server';
 import {Site} from '@/lib/site';
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
 	const host = req.headers.get('host');
 
 	if (host) {

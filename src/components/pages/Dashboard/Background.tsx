@@ -1,6 +1,11 @@
-import {type PropsWithChildren, useCallback, useMemo, useRef} from 'react';
+import {
+	type PropsWithChildren,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+} from 'react';
 import clsx from '@/lib/clsx';
-import {useEvent, useMount} from 'react-use';
 
 type BackgroundProps = PropsWithChildren<{
 	className?: string;
@@ -35,7 +40,7 @@ const Background = ({
 	>([]);
 	const grid = useRef({columns: 0, rows: 0});
 	const context = useRef<CanvasRenderingContext2D | null>(null);
-	const lastGlitchTime = useRef(Date.now());
+	const lastGlitchTime = useRef(0);
 
 	const fontSize = 16;
 	const charWidth = 10;
@@ -257,18 +262,27 @@ const Background = ({
 		}
 	}, [drawLetters]);
 
-	const animate = useCallback(() => {
-		const now = Date.now();
-		if (now - lastGlitchTime.current >= glitchSpeed) {
-			updateLetters();
-			drawLetters();
-			lastGlitchTime.current = now;
+	const startAnimation = useCallback(() => {
+		if (animationRef.current) {
+			cancelAnimationFrame(animationRef.current);
 		}
 
-		if (smooth) {
-			handleSmoothTransitions();
+		function animate() {
+			const now = performance.now();
+			if (now - lastGlitchTime.current >= glitchSpeed) {
+				updateLetters();
+				drawLetters();
+				lastGlitchTime.current = now;
+			}
+
+			if (smooth) {
+				handleSmoothTransitions();
+			}
+
+			animationRef.current = requestAnimationFrame(animate);
 		}
 
+		lastGlitchTime.current = performance.now();
 		animationRef.current = requestAnimationFrame(animate);
 	}, [
 		glitchSpeed,
@@ -284,11 +298,21 @@ const Background = ({
 
 		context.current = canvas.getContext('2d');
 		resizeCanvas();
-		animate();
-	}, [animate, resizeCanvas]);
+		startAnimation();
+	}, [resizeCanvas, startAnimation]);
 
-	useMount(draw);
-	useEvent('resize', draw);
+	useEffect(() => {
+		draw();
+		window.addEventListener('resize', resizeCanvas);
+
+		return () => {
+			window.removeEventListener('resize', resizeCanvas);
+
+			if (animationRef.current) {
+				cancelAnimationFrame(animationRef.current);
+			}
+		};
+	}, [draw, resizeCanvas]);
 
 	return (
 		<div className={clsx('relative overflow-hidden', containerClassName)}>

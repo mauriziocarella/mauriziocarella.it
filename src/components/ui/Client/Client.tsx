@@ -1,15 +1,12 @@
 'use client';
 
 import {type PropsWithChildren, useEffect, useState} from 'react';
+import useIsClient from '@/lib/hooks/useIsClient';
 import {LoadingIcon} from '@/components/ui/Loading/Loading';
 
 export type ClientOnlyProps = PropsWithChildren;
 export const ClientOnly = ({children}: ClientOnlyProps) => {
-	const [isMounted, setIsMounted] = useState(false);
-
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
+	const isMounted = useIsClient();
 
 	if (!isMounted) {
 		return null;
@@ -25,7 +22,8 @@ export const ClientLoader = ({delay = 100}: ClientLoader) => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		setTimeout(() => setLoading(false), delay);
+		const timeout = setTimeout(() => setLoading(false), delay);
+		return () => clearTimeout(timeout);
 	}, [delay]);
 
 	if (!loading) return null;

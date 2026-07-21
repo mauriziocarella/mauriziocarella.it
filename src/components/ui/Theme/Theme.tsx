@@ -1,14 +1,15 @@
 'use client';
 
 import {useTheme} from 'next-themes';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback} from 'react';
 import {MoonIcon, SunIcon, SunMoonIcon} from 'lucide-react';
 import {IconButton} from '@/components/ui/Button/Button';
 import {AnimatePresence, motion} from 'framer-motion';
 import {Tooltip} from '@/components/ui/Tooltip/Tooltip';
+import useIsClient from '@/lib/hooks/useIsClient';
 
 export const ThemeToggle = () => {
-	const [mounted, setMounted] = useState(false);
+	const mounted = useIsClient();
 	const {theme, setTheme} = useTheme();
 
 	const toggleTheme = useCallback(() => {
@@ -16,10 +17,6 @@ export const ThemeToggle = () => {
 			theme === 'dark' ? 'light' : theme === 'light' ? 'system' : 'dark',
 		);
 	}, [setTheme]);
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
 
 	if (!mounted) return null;
 

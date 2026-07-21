@@ -4,7 +4,6 @@ import React, {
 	MouseEvent,
 	TouchEvent,
 	useCallback,
-	useEffect,
 	useMemo,
 	useRef,
 	useState,
@@ -34,7 +33,7 @@ export const Slider = ({
 	...props
 }: SliderProps) => {
 	const isClient = useIsClient();
-	const [value, setValue] = useState(_value ?? min);
+	const value = Number(_value ?? min);
 
 	const [containerRef, setContainerRef] = useStateRef<HTMLDivElement>();
 	const input = useRef<HTMLInputElement>(null);
@@ -103,10 +102,6 @@ export const Slider = ({
 	useEvent('touchend', touchend);
 	useEvent('mousemove', mousemove);
 	useEvent('mouseup', mouseup);
-
-	useEffect(() => {
-		if (typeof _value !== 'undefined') setValue(Number(_value));
-	}, [_value]);
 
 	const percentage = useMemo(() => {
 		const percentage = ((value - min) / (max - min)) * 100;
