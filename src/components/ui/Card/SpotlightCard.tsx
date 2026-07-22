@@ -32,8 +32,12 @@ export const SpotlightCard = <As extends ElementType = 'div'>({
 	const Component = as ?? 'div';
 	const divRef = useRef<HTMLDivElement>(null);
 	const [isFocused, setIsFocused] = useState<boolean>(false);
-	const [position, setPosition] = useState<Position>({x: 0, y: 0});
 	const [opacity, setOpacity] = useState<number>(0);
+
+	const setPosition = useCallback((position: Position) => {
+		divRef.current?.style.setProperty('--spotlight-x', `${position.x}px`);
+		divRef.current?.style.setProperty('--spotlight-y', `${position.y}px`);
+	}, []);
 
 	const handleMouseMove = useCallback<MouseEventHandler<HTMLDivElement>>(
 		(e) => {
@@ -42,7 +46,7 @@ export const SpotlightCard = <As extends ElementType = 'div'>({
 			const rect = divRef.current.getBoundingClientRect();
 			setPosition({x: e.clientX - rect.left, y: e.clientY - rect.top});
 		},
-		[isFocused],
+		[isFocused, setPosition],
 	);
 
 	const handleFocus = useCallback(() => {
@@ -78,10 +82,16 @@ export const SpotlightCard = <As extends ElementType = 'div'>({
 				className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out z-0"
 				style={{
 					opacity,
-					background: `radial-gradient(circle at ${position.x}px ${position.y}px, var(--color-spotlight), transparent)`,
+					background:
+						'radial-gradient(circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--color-spotlight), transparent 58%)',
+					transform: 'translateZ(24px)',
 				}}
 			/>
-			<div className={clsx('relative h-full', className)}>{children}</div>
+			<div
+				className={clsx('relative h-full', className)}
+				style={{transform: 'translateZ(32px)'}}>
+				{children}
+			</div>
 		</Card>
 	);
 };

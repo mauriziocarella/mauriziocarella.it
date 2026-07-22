@@ -9,9 +9,10 @@ import React, {
 } from 'react';
 import {
 	motion,
-	useMotionValue,
-	useSpring,
 	useMotionTemplate,
+	useMotionValue,
+	useReducedMotion,
+	useSpring,
 } from 'framer-motion';
 import clsx from '@/lib/clsx';
 import {mergeRefs} from '@/lib';
@@ -20,6 +21,8 @@ import type {Extend} from '#/@types';
 export type Container3DProps = Extend<
 	ComponentProps<typeof motion.div>,
 	{
+		lift?: number;
+		perspective?: number;
 		rotation?: number;
 	}
 >;
@@ -30,51 +33,106 @@ export const Container3D = forwardRef<HTMLDivElement, Container3DProps>(
 			className,
 			onMouseMove,
 			onMouseLeave,
-			rotation = 15,
+			onMouseEnter,
+			style,
+			lift = 8,
+			perspective = 900,
+			rotation = 10,
 			...props
 		},
 		ref,
 	) {
 		const innerRef = useRef<HTMLDivElement>(null);
+		const prefersReducedMotion = useReducedMotion();
 		const x = useMotionValue(0);
 		const y = useMotionValue(0);
+		const liftY = useMotionValue(0);
+		const scale = useMotionValue(1);
+		const shadowOpacity = useMotionValue(0);
 
-		const xSpring = useSpring(x);
-		const ySpring = useSpring(y);
+		const spring = {stiffness: 220, damping: 24, mass: 0.4};
+		const xSpring = useSpring(x, spring);
+		const ySpring = useSpring(y, spring);
+		const liftYSpring = useSpring(liftY, spring);
+		const scaleSpring = useSpring(scale, spring);
+		const shadowOpacitySpring = useSpring(shadowOpacity, spring);
 
-		const transform = useMotionTemplate`rotateX(${ySpring}deg) rotateY(${xSpring}deg)`;
+		const transform = useMotionTemplate`perspective(${perspective}px) translateY(${liftYSpring}px) rotateX(${ySpring}deg) rotateY(${xSpring}deg) scale(${scaleSpring})`;
+		const boxShadow = useMotionTemplate`0 ${shadowOpacitySpring}px ${shadowOpacitySpring}px rgb(0 0 0 / 0.18)`;
 
 		const handleMouseMove = useCallback<MouseEventHandler<HTMLDivElement>>(
 			(e) => {
 				if (!innerRef.current) return;
 				const rect = innerRef.current.getBoundingClientRect();
-				const mouseX = (e.clientX - rect.left) * rotation;
-				const mouseY = (e.clientY - rect.top) * rotation;
-				x.set(mouseX / rect.width - rotation / 2);
-				y.set((mouseY / rect.height - rotation / 2) * -1);
+				const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+				const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+
+				if (!prefersReducedMotion) {
+					x.set(mouseX * rotation);
+					y.set(mouseY * rotation * -1);
+					liftY.set(-lift);
+					shadowOpacity.set(lift);
+				}
+
 				onMouseMove?.(e);
 			},
-			[onMouseMove, rotation, x, y],
+			[
+				lift,
+				liftY,
+				onMouseMove,
+				prefersReducedMotion,
+				rotation,
+				shadowOpacity,
+				x,
+				y,
+			],
+		);
+
+		const handleMouseEnter = useCallback<MouseEventHandler<HTMLDivElement>>(
+			(e) => {
+				if (!prefersReducedMotion) {
+					liftY.set(-lift);
+					scale.set(1.018);
+					shadowOpacity.set(lift);
+				}
+
+				onMouseEnter?.(e);
+			},
+			[
+				lift,
+				liftY,
+				onMouseEnter,
+				prefersReducedMotion,
+				scale,
+				shadowOpacity,
+			],
 		);
 
 		const handleMouseLeave = useCallback<MouseEventHandler<HTMLDivElement>>(
 			(e) => {
 				x.set(0);
 				y.set(0);
+				liftY.set(0);
+				scale.set(1);
+				shadowOpacity.set(0);
 				onMouseLeave?.(e);
 			},
-			[onMouseLeave, x, y],
+			[liftY, onMouseLeave, scale, shadowOpacity, x, y],
 		);
 
 		return (
 			<motion.div
 				{...props}
 				ref={mergeRefs(ref, innerRef)}
+				onMouseEnter={handleMouseEnter}
 				onMouseMove={handleMouseMove}
 				onMouseLeave={handleMouseLeave}
 				style={{
+					...style,
+					boxShadow,
 					transformStyle: 'preserve-3d',
 					transform,
+					willChange: 'transform',
 				}}
 				className={clsx(className)}>
 				{children}
