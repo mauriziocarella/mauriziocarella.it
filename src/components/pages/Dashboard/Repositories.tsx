@@ -1,8 +1,5 @@
-'use client';
-
-import {useEffect, useRef, useState} from 'react';
-import {LoadingIcon} from '@/components/ui/Loading/Loading';
 import type {Repository} from '@/models/Repository';
+import {DashboardCard} from './DashboardCard';
 
 type GitHubRepository = {
 	id: number;
@@ -13,100 +10,56 @@ type GitHubRepository = {
 	forks_count: number;
 };
 
-const getRepositories = async (signal: AbortSignal): Promise<Repository[]> => {
-	const response = await fetch(
-		'https://api.github.com/users/mauriziocarella/repos?sort=pushed',
-		{signal},
-	);
-
-	if (!response.ok) {
-		throw new Error('Unable to load GitHub repositories');
-	}
-
-	const repositories = (await response.json()) as GitHubRepository[];
-
-	return repositories.map((repository) => ({
-		id: String(repository.id),
-		name: repository.name,
-		description: repository.description ?? '',
-		url: repository.html_url,
-		stars: repository.stargazers_count,
-		forks: repository.forks_count,
-	}));
-};
-
-export default function Repositories() {
-	const containerRef = useRef<HTMLDivElement | null>(null);
-	const [shouldLoad, setShouldLoad] = useState(false);
-	const [repositories, setRepositories] = useState<Repository[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		const element = containerRef.current;
-		if (!element || shouldLoad) return;
-
-		if (typeof IntersectionObserver === 'undefined') {
-			const timeout = globalThis.setTimeout(
-				() => setShouldLoad(true),
-				0,
-			);
-			return () => globalThis.clearTimeout(timeout);
-		}
-
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (!entry?.isIntersecting) return;
-
-				setShouldLoad(true);
-				observer.disconnect();
+const getRepositories = async (): Promise<Repository[]> => {
+	try {
+		const response = await fetch(
+			'https://api.github.com/users/mauriziocarella/repos?sort=pushed',
+			{
+				headers: {
+					Accept: 'application/vnd.github+json',
+				},
+				next: {
+					revalidate: 15 * 60,
+				},
 			},
-			{rootMargin: '400px 0px'},
 		);
 
-		observer.observe(element);
+		if (!response.ok) {
+			return [];
+		}
 
-		return () => observer.disconnect();
-	}, [shouldLoad]);
+		const repositories = (await response.json()) as GitHubRepository[];
 
-	useEffect(() => {
-		if (!shouldLoad) return;
+		return repositories.map((repository) => ({
+			id: String(repository.id),
+			name: repository.name,
+			description: repository.description ?? '',
+			url: repository.html_url,
+			stars: repository.stargazers_count,
+			forks: repository.forks_count,
+		}));
+	} catch {
+		return [];
+	}
+};
 
-		const controller = new AbortController();
-
-		getRepositories(controller.signal)
-			.then(setRepositories)
-			.catch((error: unknown) => {
-				if (error instanceof DOMException && error.name === 'AbortError') {
-					return;
-				}
-
-				setRepositories([]);
-			})
-			.finally(() => {
-				if (!controller.signal.aborted) {
-					setIsLoading(false);
-				}
-			});
-
-		return () => controller.abort();
-	}, [shouldLoad]);
+export default async function Repositories() {
+	const repositories = await getRepositories();
 
 	return (
-		<div ref={containerRef}>
+		<div>
 			<div className="container mx-auto px-4 py-10">
 				<h1 className="text-4xl font-bold mb-8">My Repositories</h1>
 
 				<div>
-					{shouldLoad && isLoading ? (
-						<LoadingIcon className="mx-auto" />
-					) : !repositories?.length ? (
+					{!repositories?.length ? (
 						<></>
 					) : (
 						<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 							{repositories?.map((repository) => (
-								<div
+								<DashboardCard
 									key={repository.id}
-									className="border bg-background-800 rounded-2xl p-6 flex flex-col transition duration-500 ease-in-out transform-gpu motion-safe:hover:-translate-y-2 motion-safe:hover:scale-[1.018] hover:shadow-lg">
+									contentClassName="flex flex-col">
 									<h2 className="text-xl font-semibold">
 										{repository.name}
 									</h2>
@@ -151,7 +104,7 @@ export default function Repositories() {
 											<path d="m12 5 7 7-7 7" />
 										</svg>
 									</a>
-								</div>
+								</DashboardCard>
 							))}
 						</div>
 					)}

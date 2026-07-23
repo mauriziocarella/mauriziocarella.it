@@ -1,4 +1,5 @@
 import {Site} from '@/lib/site';
+import {DashboardCard} from './DashboardCard';
 
 export default function Apps() {
 	const apps = [
@@ -23,9 +24,9 @@ export default function Apps() {
 
 				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 					{apps?.map((app) => (
-						<div
+						<DashboardCard
 							key={app.id}
-							className="border bg-background-800 rounded-2xl p-6 flex flex-col transition duration-500 ease-in-out transform-gpu motion-safe:hover:-translate-y-2 motion-safe:hover:scale-[1.018] hover:shadow-lg">
+							contentClassName="flex flex-col">
 							<h2 className="text-xl font-semibold">
 								{app.name}
 							</h2>
@@ -50,7 +51,7 @@ export default function Apps() {
 									<path d="m12 5 7 7-7 7" />
 								</svg>
 							</a>
-						</div>
+						</DashboardCard>
 					))}
 				</div>
 			</div>
