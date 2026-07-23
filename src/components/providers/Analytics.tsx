@@ -7,7 +7,17 @@ export const Analytics = () => {
 	const [isClient, setIsClient] = useState(false);
 
 	useEffect(() => {
-		setTimeout(() => setIsClient(true), 100);
+		if ('requestIdleCallback' in window) {
+			const id = window.requestIdleCallback(() => setIsClient(true), {
+				timeout: 2500,
+			});
+
+			return () => window.cancelIdleCallback(id);
+		}
+
+		const id = globalThis.setTimeout(() => setIsClient(true), 2500);
+
+		return () => globalThis.clearTimeout(id);
 	}, []);
 
 	if (!isClient) return null;
