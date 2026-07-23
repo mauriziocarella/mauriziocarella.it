@@ -3,6 +3,7 @@
 @layer base {
 	html {
 		@apply text-foreground bg-background;
+		scroll-behavior: smooth;
 	}
 
 	html, body {
