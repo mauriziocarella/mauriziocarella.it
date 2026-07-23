@@ -1,5 +1,6 @@
 'use client';
 
+import {useEffect, useRef, useState} from 'react';
 import useQuery from '@/lib/hooks/useQuery';
 import {getRepositoriesQuery} from '@/lib/queries/repositories';
 import {Link} from '@/components/ui/Link/Link';
@@ -10,15 +11,47 @@ import {SpotlightCard} from '@/components/ui/Card/SpotlightCard';
 import {Container3D} from '@/components/ui/Containers/Container3D';
 
 export default function Repositories() {
-	const {data: repositories, isLoading} = useQuery(getRepositoriesQuery);
+	const containerRef = useRef<HTMLDivElement | null>(null);
+	const [shouldLoad, setShouldLoad] = useState(false);
+	const {data: repositories, isLoading} = useQuery({
+		...getRepositoriesQuery,
+		enabled: shouldLoad,
+	});
+
+	useEffect(() => {
+		const element = containerRef.current;
+		if (!element || shouldLoad) return;
+
+		if (typeof IntersectionObserver === 'undefined') {
+			const timeout = globalThis.setTimeout(
+				() => setShouldLoad(true),
+				0,
+			);
+			return () => globalThis.clearTimeout(timeout);
+		}
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (!entry?.isIntersecting) return;
+
+				setShouldLoad(true);
+				observer.disconnect();
+			},
+			{rootMargin: '400px 0px'},
+		);
+
+		observer.observe(element);
+
+		return () => observer.disconnect();
+	}, [shouldLoad]);
 
 	return (
-		<div>
+		<div ref={containerRef}>
 			<div className="container mx-auto px-4 py-10">
 				<h1 className="text-4xl font-bold mb-8">My Repositories</h1>
 
 				<div>
-					{isLoading ? (
+					{shouldLoad && isLoading ? (
 						<LoadingIcon className="mx-auto" />
 					) : !repositories?.length ? (
 						<></>

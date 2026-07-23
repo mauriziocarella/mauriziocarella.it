@@ -1,7 +1,7 @@
 'use client';
 
 import {ArrowDownIcon, MailIcon} from 'lucide-react';
-import {useCallback, useMemo} from 'react';
+import {type MouseEvent, useCallback, useMemo} from 'react';
 import {useWindowScroll, useWindowSize} from 'react-use';
 import clsx from '@/lib/clsx';
 import {ClientOnly} from '@/components/ui/Client/Client';
@@ -27,7 +27,8 @@ const Profile = () => {
 					<Image
 						src="/images/logo.png"
 						alt="Logo"
-						priority
+						preload
+						fetchPriority="high"
 						sizes="128px"
 					/>
 				</div>
@@ -56,11 +57,6 @@ const Socials = ({className}: SocialsProps) => {
 				title: 'GitHub Profile',
 				icon: GitHubIcon,
 			},
-			{
-				url: 'mailto:info@mauriziocarella.it',
-				title: 'Email',
-				icon: MailIcon,
-			},
 		],
 		[],
 	);
@@ -81,7 +77,28 @@ const Socials = ({className}: SocialsProps) => {
 					<Icon name={social.icon} className="size-6" />
 				</Link>
 			))}
+			<EmailSocial />
 		</div>
+	);
+};
+
+const EmailSocial = () => {
+	const handleClick = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
+		event.preventDefault();
+		const user = 'info';
+		const domain = 'mauriziocarella.it';
+		window.location.href = `mailto:${user}@${domain}`;
+	}, []);
+
+	return (
+		<a
+			href="#email"
+			title="Email"
+			aria-label="Email"
+			onClick={handleClick}
+			className="inline-flex items-center w-fit gap-2 hover:underline underline-offset-2 font-medium transition-colors text-inherit hover:text-accent">
+			<Icon name={MailIcon} className="size-6" />
+		</a>
 	);
 };
 

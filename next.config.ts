@@ -3,6 +3,9 @@ import bundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig: NextConfig = {
 	output: 'standalone',
+	experimental: {
+		inlineCss: true,
+	},
 	sassOptions: {
 		silenceDeprecations: ['legacy-js-api'],
 	},
