@@ -302,6 +302,14 @@ const Background = ({
 	}, [resizeCanvas, startAnimation]);
 
 	useEffect(() => {
+		const canAnimate =
+			window.matchMedia('(min-width: 768px)').matches &&
+			!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		if (!canAnimate) {
+			return;
+		}
+
 		draw();
 		window.addEventListener('resize', resizeCanvas);
 
@@ -318,7 +326,7 @@ const Background = ({
 		<div className={clsx('relative overflow-hidden', containerClassName)}>
 			<canvas
 				ref={canvasRef}
-				className="block w-full h-full opacity-35 mask-b-to-100%"
+				className="hidden md:block w-full h-full opacity-35 mask-b-to-100%"
 			/>
 			<div className={clsx('absolute inset-0 size-full', className)}>
 				{children}

@@ -28,7 +28,7 @@ const Profile = () => {
 						src="/images/logo.png"
 						alt="Logo"
 						priority
-						sizes="(max-width: 768px) 100vw, 50vw"
+						sizes="128px"
 					/>
 				</div>
 
