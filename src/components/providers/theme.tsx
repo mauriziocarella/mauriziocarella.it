@@ -1,8 +1,9 @@
 'use client';
 
 import {ThemeProvider as ReactThemeProvider} from 'next-themes';
-import {type PropsWithChildren, useCallback, useEffect} from 'react';
+import {type PropsWithChildren, useCallback} from 'react';
 import {ThemeToggle} from '@/components/ui/Theme/Theme';
+import {useEvent, useMount} from 'react-use';
 
 const ThemeProvider = ({children}: PropsWithChildren) => {
 	const resize = useCallback(() => {
@@ -10,12 +11,8 @@ const ThemeProvider = ({children}: PropsWithChildren) => {
 		html.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
 	}, []);
 
-	useEffect(() => {
-		resize();
-		window.addEventListener('resize', resize);
-
-		return () => window.removeEventListener('resize', resize);
-	}, [resize]);
+	useMount(resize);
+	useEvent('resize', resize);
 
 	return (
 		<ReactThemeProvider

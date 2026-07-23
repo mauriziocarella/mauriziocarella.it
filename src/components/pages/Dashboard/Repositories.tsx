@@ -1,65 +1,67 @@
-import type {Repository} from '@/models/Repository';
-import {DashboardCard} from './DashboardCard';
+'use client';
 
-type GitHubRepository = {
-	id: number;
-	name: string;
-	description: string | null;
-	html_url: string;
-	stargazers_count: number;
-	forks_count: number;
-};
+import {useEffect, useRef, useState} from 'react';
+import useQuery from '@/lib/hooks/useQuery';
+import {getRepositoriesQuery} from '@/lib/queries/repositories';
+import {Link} from '@/components/ui/Link/Link';
+import {LoadingIcon} from '@/components/ui/Loading/Loading';
+import {MoveRightIcon, StarIcon} from 'lucide-react';
+import Icon from '@/components/ui/Icons/Icon';
+import {SpotlightCard} from '@/components/ui/Card/SpotlightCard';
+import {Container3D} from '@/components/ui/Containers/Container3D';
 
-const getRepositories = async (): Promise<Repository[]> => {
-	try {
-		const response = await fetch(
-			'https://api.github.com/users/mauriziocarella/repos?sort=pushed',
-			{
-				headers: {
-					Accept: 'application/vnd.github+json',
-				},
-				next: {
-					revalidate: 15 * 60,
-				},
-			},
-		);
+export default function Repositories() {
+	const containerRef = useRef<HTMLDivElement | null>(null);
+	const [shouldLoad, setShouldLoad] = useState(false);
+	const {data: repositories, isLoading} = useQuery({
+		...getRepositoriesQuery,
+		enabled: shouldLoad,
+	});
 
-		if (!response.ok) {
-			return [];
+	useEffect(() => {
+		const element = containerRef.current;
+		if (!element || shouldLoad) return;
+
+		if (typeof IntersectionObserver === 'undefined') {
+			const timeout = globalThis.setTimeout(
+				() => setShouldLoad(true),
+				0,
+			);
+			return () => globalThis.clearTimeout(timeout);
 		}
 
-		const repositories = (await response.json()) as GitHubRepository[];
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (!entry?.isIntersecting) return;
 
-		return repositories.map((repository) => ({
-			id: String(repository.id),
-			name: repository.name,
-			description: repository.description ?? '',
-			url: repository.html_url,
-			stars: repository.stargazers_count,
-			forks: repository.forks_count,
-		}));
-	} catch {
-		return [];
-	}
-};
+				setShouldLoad(true);
+				observer.disconnect();
+			},
+			{rootMargin: '400px 0px'},
+		);
 
-export default async function Repositories() {
-	const repositories = await getRepositories();
+		observer.observe(element);
+
+		return () => observer.disconnect();
+	}, [shouldLoad]);
 
 	return (
-		<div>
+		<div ref={containerRef}>
 			<div className="container mx-auto px-4 py-10">
 				<h1 className="text-4xl font-bold mb-8">My Repositories</h1>
 
 				<div>
-					{!repositories?.length ? (
+					{shouldLoad && isLoading ? (
+						<LoadingIcon className="mx-auto" />
+					) : !repositories?.length ? (
 						<></>
 					) : (
 						<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 							{repositories?.map((repository) => (
-								<DashboardCard
+								<SpotlightCard
+									as={Container3D}
 									key={repository.id}
-									contentClassName="flex flex-col">
+									className="flex flex-col">
 									<h2 className="text-xl font-semibold">
 										{repository.name}
 									</h2>
@@ -69,42 +71,20 @@ export default async function Repositories() {
 
 									<div className="flex flex-wrap mt-2">
 										{repository.stars > 0 && (
-											<span className="inline-flex items-center gap-2">
-												<svg
-													viewBox="0 0 24 24"
-													fill="none"
-													stroke="currentColor"
-													strokeWidth="2"
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													className="size-5"
-													aria-hidden="true">
-													<path d="M11.48 3.5a.56.56 0 0 1 1.04 0l2.13 5.12a.56.56 0 0 0 .47.34l5.53.44a.56.56 0 0 1 .32.98l-4.21 3.6a.56.56 0 0 0-.18.55l1.29 5.39a.56.56 0 0 1-.84.61l-4.73-2.89a.56.56 0 0 0-.58 0l-4.73 2.89a.56.56 0 0 1-.84-.61l1.29-5.39a.56.56 0 0 0-.18-.55l-4.21-3.6a.56.56 0 0 1 .32-.98l5.53-.44a.56.56 0 0 0 .47-.34z" />
-												</svg>
+											<Icon name={StarIcon}>
 												{repository.stars}
-											</span>
+											</Icon>
 										)}
 									</div>
 
-									<a
+									<Link
 										href={repository.url}
 										target="_blank"
-										className="inline-flex items-center w-fit gap-2 text-accent hover:underline underline-offset-2 font-medium transition-colors mt-4">
+										className="mt-4">
 										View on GitHub
-										<svg
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											strokeWidth="2"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											className="size-5"
-											aria-hidden="true">
-											<path d="M5 12h14" />
-											<path d="m12 5 7 7-7 7" />
-										</svg>
-									</a>
-								</DashboardCard>
+										<Icon name={MoveRightIcon} />
+									</Link>
+								</SpotlightCard>
 							))}
 						</div>
 					)}
