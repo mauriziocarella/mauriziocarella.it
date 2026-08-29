@@ -5,8 +5,9 @@ export const Footer = () => {
 		<ul className="flex justify-center gap mx-auto py-8">
 			<li>
 				<Link
-					href="https://www.iubenda.com/privacy-policy/53338723"
+					href="/privacy"
 					target="_blank"
+					rel="noopener noreferrer"
 					className="text-inherit opacity-60 hover:opacity-100 transition-opacity">
 					Privacy Policy
 				</Link>
@@ -14,8 +15,9 @@ export const Footer = () => {
 			<li className="cursor-default opacity-60">•</li>
 			<li>
 				<Link
-					href="https://www.iubenda.com/privacy-policy/53338723/cookie-policy"
+					href="/cookie-policy"
 					target="_blank"
+					rel="noopener noreferrer"
 					className="text-inherit opacity-60 hover:opacity-100 transition-opacity">
 					Cookie Policy
 				</Link>
