@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
 	async redirects() {
 		return [
 			{
+				source: '/privacy-policy',
+				destination: 'https://www.iubenda.com/privacy-policy/53338723',
+				permanent: false,
+			},
+			{
 				source: '/privacy',
 				destination: 'https://www.iubenda.com/privacy-policy/53338723',
 				permanent: false,

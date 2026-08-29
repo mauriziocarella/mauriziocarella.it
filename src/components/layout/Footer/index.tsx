@@ -5,7 +5,7 @@ export const Footer = () => {
 		<ul className="flex justify-center gap mx-auto py-8">
 			<li>
 				<Link
-					href="/privacy"
+					href="/privacy-policy"
 					target="_blank"
 					rel="noopener noreferrer"
 					className="text-inherit opacity-60 hover:opacity-100 transition-opacity">
