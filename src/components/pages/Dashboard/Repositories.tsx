@@ -4,11 +4,33 @@ import {useEffect, useRef, useState} from 'react';
 import useQuery from '@/lib/hooks/useQuery';
 import {getRepositoriesQuery} from '@/lib/queries/repositories';
 import {Link} from '@/components/ui/Link/Link';
-import {LoadingIcon} from '@/components/ui/Loading/Loading';
 import {ArrowUpRightIcon, StarIcon} from 'lucide-react';
 import Icon from '@/components/ui/Icons/Icon';
 import {SpotlightCard} from '@/components/ui/Card/SpotlightCard';
+import {Card} from '@/components/ui/Card/Card';
 import {Container3D} from '@/components/ui/Containers/Container3D';
+
+const skeletonItems = Array.from({length: 6}, (_, index) => index);
+
+const RepositoriesSkeleton = () => (
+	<div role="status" aria-live="polite">
+		<span className="sr-only">Loading repositories</span>
+		<div
+			aria-hidden="true"
+			className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+			{skeletonItems.map((item) => (
+				<Card
+					key={item}
+					className="flex min-h-40 animate-pulse flex-col motion-reduce:animate-none">
+					<div className="h-5 w-2/5 rounded bg-background-950" />
+					<div className="mt-4 h-4 w-5/6 rounded bg-background-950" />
+					<div className="mt-2 h-4 w-2/3 rounded bg-background-950" />
+					<div className="mt-auto h-4 w-32 rounded bg-background-950" />
+				</Card>
+			))}
+		</div>
+	</div>
+);
 
 export default function Repositories() {
 	const containerRef = useRef<HTMLDivElement | null>(null);
@@ -52,7 +74,7 @@ export default function Repositories() {
 
 				<div>
 					{shouldLoad && isLoading ? (
-						<LoadingIcon className="mx-auto" />
+						<RepositoriesSkeleton />
 					) : !repositories?.length ? (
 						<></>
 					) : (
