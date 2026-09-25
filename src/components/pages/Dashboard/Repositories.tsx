@@ -64,10 +64,10 @@ export default function Repositories() {
 									target="_blank"
 									rel="noopener noreferrer"
 									aria-label={`View ${repository.name} on GitHub`}
-									className="group block h-full w-full rounded-2xl font-normal text-inherit hover:no-underline">
+									className="group block h-full w-full rounded-2xl font-normal text-inherit hover:no-underline focus-visible:ring-0 focus-visible:ring-offset-0">
 									<SpotlightCard
 										as={Container3D}
-										containerClassName="h-full cursor-pointer transition-colors group-hover:border-accent/50 group-focus-visible:border-accent/50"
+										containerClassName="card-border-trace h-full cursor-pointer"
 										className="flex flex-col">
 										<h2 className="text-xl font-semibold">
 											{repository.name}

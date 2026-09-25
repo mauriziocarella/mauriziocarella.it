@@ -41,6 +41,57 @@
 }
 
 @layer components {
+	@property --card-border-progress {
+		syntax: "<angle>";
+		inherits: false;
+		initial-value: 0deg;
+	}
+
+	.card-border-trace::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 20;
+		padding: 2px;
+		border-radius: inherit;
+		pointer-events: none;
+		background: conic-gradient(
+			from -90deg,
+			var(--color-primary) 0deg,
+			var(--color-primary) var(--card-border-progress),
+			transparent var(--card-border-progress),
+			transparent 360deg
+		);
+		-webkit-mask:
+			linear-gradient(#000 0 0) content-box,
+			linear-gradient(#000 0 0);
+		-webkit-mask-composite: xor;
+		mask:
+			linear-gradient(#000 0 0) content-box,
+			linear-gradient(#000 0 0);
+		mask-composite: exclude;
+		opacity: 0;
+		transform: translateZ(40px);
+		transition:
+			--card-border-progress 600ms linear,
+			opacity 100ms linear;
+	}
+
+	.group:is(:hover, :focus-visible) > .card-border-trace::after {
+		--card-border-progress: 360deg;
+		opacity: 1;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.card-border-trace::after {
+			transition: none;
+		}
+
+		.group:is(:hover, :focus-visible) > .card-border-trace::after {
+			--card-border-progress: 360deg;
+		}
+	}
+
 	input {
 		&[type="checkbox"] {
 			&:checked {

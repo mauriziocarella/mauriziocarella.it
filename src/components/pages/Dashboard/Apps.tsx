@@ -4,7 +4,7 @@ import {Link} from '@/components/ui/Link/Link';
 import {useMemo} from 'react';
 import {Site} from '@/lib/site';
 import Icon from '@/components/ui/Icons/Icon';
-import {MoveRightIcon} from 'lucide-react';
+import {ArrowUpRightIcon} from 'lucide-react';
 import {SpotlightCard} from '@/components/ui/Card/SpotlightCard';
 import {Container3D} from '@/components/ui/Containers/Container3D';
 
@@ -41,23 +41,32 @@ export default function Apps() {
 
 				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 					{apps?.map((app) => (
-						<SpotlightCard
-							as={Container3D}
+						<Link
 							key={app.id}
-							className="flex flex-col">
-							<h2 className="text-xl font-semibold">
-								{app.name}
-							</h2>
-							<p className="flex-1 opacity-80 mt-2">
-								{app.description}
-							</p>
-							<Link
-								href={new URL(app.url, Site.url)}
-								target="_blank"
-								className="mt-4">
-								View App <Icon name={MoveRightIcon} />
-							</Link>
-						</SpotlightCard>
+							href={new URL(app.url, Site.url)}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label={`View ${app.name}`}
+							className="group block h-full w-full rounded-2xl font-normal text-inherit hover:no-underline focus-visible:ring-0 focus-visible:ring-offset-0">
+							<SpotlightCard
+								as={Container3D}
+								containerClassName="card-border-trace h-full cursor-pointer"
+								className="flex flex-col">
+								<h2 className="text-xl font-semibold">
+									{app.name}
+								</h2>
+								<p className="flex-1 opacity-80 mt-2">
+									{app.description}
+								</p>
+								<span className="mt-4 inline-flex w-fit items-center gap-2 font-medium text-accent group-hover:underline underline-offset-2">
+									View App
+									<Icon
+										name={ArrowUpRightIcon}
+										className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+									/>
+								</span>
+							</SpotlightCard>
+						</Link>
 					))}
 				</div>
 			</div>
