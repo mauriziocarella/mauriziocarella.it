@@ -23,6 +23,13 @@ export default function Apps() {
 				description: 'Share text or links via qrcode or public list',
 				url: 'https://beam.mauriziocarella.it',
 			},
+			{
+				id: 3,
+				name: 'httpbin.tools',
+				description:
+					'Inspect incoming HTTP requests and configure endpoint responses',
+				url: 'https://httpbin.tools.mauriziocarella.it',
+			},
 		],
 		[],
 	);
