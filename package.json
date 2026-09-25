@@ -1,6 +1,6 @@
 {
 	"name": "mauriziocarella.it",
-	"version": "1.4.6",
+	"version": "1.4.7",
 	"private": true,
 	"packageManager": "pnpm@10.18.3",
 	"scripts": {
