@@ -5,7 +5,7 @@ import useQuery from '@/lib/hooks/useQuery';
 import {getRepositoriesQuery} from '@/lib/queries/repositories';
 import {Link} from '@/components/ui/Link/Link';
 import {LoadingIcon} from '@/components/ui/Loading/Loading';
-import {MoveRightIcon, StarIcon} from 'lucide-react';
+import {ArrowUpRightIcon, StarIcon} from 'lucide-react';
 import Icon from '@/components/ui/Icons/Icon';
 import {SpotlightCard} from '@/components/ui/Card/SpotlightCard';
 import {Container3D} from '@/components/ui/Containers/Container3D';
@@ -58,33 +58,41 @@ export default function Repositories() {
 					) : (
 						<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 							{repositories?.map((repository) => (
-								<SpotlightCard
-									as={Container3D}
+								<Link
 									key={repository.id}
-									className="flex flex-col">
-									<h2 className="text-xl font-semibold">
-										{repository.name}
-									</h2>
-									<p className="flex-1 opacity-80 mt-2">
-										{repository.description}
-									</p>
+									href={repository.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`View ${repository.name} on GitHub`}
+									className="group block h-full w-full rounded-2xl font-normal text-inherit hover:no-underline">
+									<SpotlightCard
+										as={Container3D}
+										containerClassName="h-full cursor-pointer transition-colors group-hover:border-accent/50 group-focus-visible:border-accent/50"
+										className="flex flex-col">
+										<h2 className="text-xl font-semibold">
+											{repository.name}
+										</h2>
+										<p className="flex-1 opacity-80 mt-2">
+											{repository.description}
+										</p>
 
-									<div className="flex flex-wrap mt-2">
-										{repository.stars > 0 && (
-											<Icon name={StarIcon}>
-												{repository.stars}
-											</Icon>
-										)}
-									</div>
+										<div className="flex flex-wrap mt-2">
+											{repository.stars > 0 && (
+												<Icon name={StarIcon}>
+													{repository.stars}
+												</Icon>
+											)}
+										</div>
 
-									<Link
-										href={repository.url}
-										target="_blank"
-										className="mt-4">
-										View on GitHub
-										<Icon name={MoveRightIcon} />
-									</Link>
-								</SpotlightCard>
+										<span className="mt-4 inline-flex w-fit items-center gap-2 font-medium text-accent group-hover:underline underline-offset-2">
+											View on GitHub
+											<Icon
+												name={ArrowUpRightIcon}
+												className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+											/>
+										</span>
+									</SpotlightCard>
+								</Link>
 							))}
 						</div>
 					)}
