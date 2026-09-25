@@ -25,7 +25,7 @@ export default function Apps() {
 			},
 			{
 				id: 3,
-				name: 'httpbin.tools',
+				name: 'httpbin',
 				description:
 					'Inspect incoming HTTP requests and configure endpoint responses',
 				url: 'https://httpbin.tools.mauriziocarella.it',
